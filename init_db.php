@@ -6,6 +6,8 @@ $username = "root";
 $password = "root";
 $dbname = "wbd1";
 
+
+// Using mysqli
 $conn = new mysqli($servername, $username, $password, $dbname);
 
 if($conn->connect_error){
@@ -22,7 +24,7 @@ $sql = "CREATE TABLE users (
 if ($conn->query($sql) === TRUE){
     echo "users table successfully created";
 } else {
-    echo "ERROR create table users"
+    echo "ERROR create table users";
 }
 
 $sql = "CREATE TABLE chocolates ( 
@@ -35,9 +37,9 @@ $sql = "CREATE TABLE chocolates (
     )";
 
 if ($conn->query($sql) === TRUE){
-    echo "chocolates table successfully created";
+    echo "chocolates table successfully created\n";
 } else {
-    echo "ERROR create table chocolates"
+    echo "ERROR create table chocolates\n";
 }
 
 $sql = "CREATE TABLE transactions ( 
@@ -55,9 +57,9 @@ $sql = "CREATE TABLE transactions (
 // reg_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 
 if ($conn->query($sql) === TRUE){
-    echo "transactions table successfully created";
+    echo "transactions table successfully created\n";
 } else {
-    echo "ERROR create table transactions"
+    echo "ERROR create table transactions\n";
 }
 
 $conn->close();
