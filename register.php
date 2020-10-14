@@ -1,5 +1,5 @@
 <?php
-    require_once "db_config.php";
+    require_once "config/db_config.php";
 
     $username = "";
     $password = "";
@@ -57,5 +57,5 @@
 
     }
 
-    readfile('public/page/register.html');
+    readfile('public/register.html');
 ?>

@@ -1,14 +1,11 @@
 <?php
 
 // Connection query change as your own needs
-$servername = "localhost";
-$username = "root";
-$password = "root";
-$dbname = "wbd1";
+require_once('db_keys.php');
 
 
 // Using mysqli
-$conn = new mysqli($servername, $username, $password, $dbname);
+$conn = new mysqli(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_NAME);
 
 if($conn->connect_error){
     die("conn failed: " . $conn->connect_error);
