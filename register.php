@@ -1,5 +1,5 @@
 <?php
-    require_once "db_config.php";
+    require_once "config/db_config.php";
 
     $username = "";
     $password = "";
@@ -57,5 +57,146 @@
 
     }
 
-    readfile('public/page/register.html');
+    // $page = file_get_contents('public/register.html');
+    // echo $page;
+    // require('public/register.html');
 ?>
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Register</title>
+        <link rel="stylesheet" href="static/styles/register.css" type="text/css">  
+    </head>
+    <body>
+        <div class="spacer"></div>
+        <header>
+            Register
+        </header>
+        <div class="spacer"></div>
+        <main>
+            this is main
+            <form  action="/">
+                <table>
+                    <tr>
+                        <th>Username</th>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input id="usernameField" name="username" onkeyup="usernameCheck()">
+                        </td>
+                    </tr>
+                    <tr id="usernameErrorRow" style="display: none">
+                        <td>
+                            <p id="usernameError"> </p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Email</th>
+                    </tr>
+                    <tr>
+                        <td> 
+                            <input type="email" id="emailField" name="email" onkeyup="checkEmail()">
+                        </td>
+                    </tr>
+                    <tr id="emailErrorRow" style="display: none">
+                        <td>
+                            <p id="emailError"> </p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Password</th>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input name="password" type="password">
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Confirm Password</th>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input name="confirm_password" type="password">
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            <button>
+                                Register!
+                            </button>
+                        </th>
+                    </tr>
+                </table>
+            </form>
+        </main>
+        <div class="spacer"></div>
+        <script>
+            function checkUsername(){
+                var usernameCheck;
+                if(window.XMLHttpRequest){
+                    usernameCheck = new XMLHttpRequest();
+                } else {
+                    usernameCheck = new ActiveXObject("Microsoft.XMLHTTP");
+                }
+
+                usernameCheck.onreadystatechange = function() {
+                    if (this.readyState == 4 && this.status == 200) {
+                        document.getElementById("usernameField").innerHTML =
+                        this.responseText;
+                    }
+                };
+
+                usernameCheck.open("POST", "check_username.php", true);
+                usernameCheck.send();
+            }
+
+            // function checking(){
+            //     alert(1);
+            //     console.log('asdasdas');
+            //     if (Math.floor(Math.random() * Math.floor(2))) {
+            //         alert(1);
+            //         document.getElementById("emailField").style.borderColor = "green";
+            //         document.getElementById("emailErrorRow").style.display = "none";
+            //     } else {
+            //         document. getElementById("emailField").style.borderColor = "red";
+            //         document.getElementById("emailErrorRow").style.display = "block";
+            //         document.getElementById("emailError").innerHTML = "Email already taken!";
+            //     }
+            // }
+            
+            function checkEmail(){
+                var emailCheck;
+                const email = document. getElementById("emailField").innerHTML;
+
+                if(window.XMLHttpRequest){
+                    emailCheck = new XMLHttpRequest();
+                } else {
+                    emailCheck = new ActiveXObject("Microsoft.XMLHTTP");
+                }
+
+                emailCheck.onreadystatechange = function() {
+                    if(this.readyState === 4){
+                        if (this.status == 200) {
+                            document.getElementById("emailField").style.borderColor = "green";
+                            document.getElementById("emailField").style.borderWidth = "3px";
+                            document.getElementById("emailErrorRow").style.display = "none";
+                        } else if (this.status == 400) {
+                            document. getElementById("emailField").style.borderColor = "red";
+                            document.getElementById("emailField").style.borderWidth = "3px";
+                            document.getElementById("emailErrorRow").style.display = "block";
+                            document.getElementById("emailError").innerHTML = "Email already taken!";
+                        }
+                    }
+                };
+
+                emailCheck.open("GET", `check_availability.php?email=${email}`, true);
+                emailCheck.send();
+            }
+
+            function submit(){
+
+            }
+        </script>
+    </body>
+</html>
