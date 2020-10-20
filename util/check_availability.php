@@ -1,6 +1,6 @@
 <?php
 
-require_once "config/db_config.php";
+require_once "../config/db_config.php";
 
 if($_SERVER["REQUEST_METHOD"] === "GET"){
     if(isset($_GET["username"])){
@@ -13,9 +13,9 @@ if($_SERVER["REQUEST_METHOD"] === "GET"){
             if($stm->execute()){
                 if($stm->rowCount() === 1){
                     $return = array(
-                        'message' => "Bad request"
+                        'message' => "Username already taken!"
                     );
-                    http_response_code(400);
+                    http_response_code(200);
                 } else {
                     $return = array(
                         'message' => "Available"
@@ -32,7 +32,7 @@ if($_SERVER["REQUEST_METHOD"] === "GET"){
         } 
         else {
             $return = array(
-                'message' => "Bad request"
+                'message' => "Bad request, username cannot be empty!"
             );
             http_response_code(400);
         }
@@ -49,7 +49,7 @@ if($_SERVER["REQUEST_METHOD"] === "GET"){
                     $return = array(
                         'message' => "Email already taken!"
                     );
-                    http_response_code(400);
+                    http_response_code(200);
                 } else {
                     $return = array(
                         'message' => "Available"
@@ -66,13 +66,13 @@ if($_SERVER["REQUEST_METHOD"] === "GET"){
         } 
         else {
             $return = array(
-                'message' => "Bad request"
+                'message' => "Bad request, email cannot be empty!"
             );
             http_response_code(400);
         }
     } else {
         $return = array(
-            'message' => "Bad request"
+            'message' => "Bad request, email/username query parameter needed!"
         );
         http_response_code(400);
     }

@@ -40,7 +40,7 @@
 
                 $stmt = $pdo->prepare($sql);
                 $stmt->bindParam(":username", $username);
-                $stmt->bindParam(":email", $username);
+                $stmt->bindParam(":email", $email);
                 $stmt->bindParam(":password_hash", $password_hash);
                 $stmt->bindParam(":is_superuser", $is_superuser);
 
@@ -108,7 +108,7 @@
                     </tr>
                     <tr>
                         <td>
-                            <input id="usernameField" name="username" onkeyup="checkUsername()">
+                            <input id="usernameField" name="username" oninput="checkUsername()">
                         </td>
                     </tr>
                     <tr id="usernameErrorRow" style="display: none">
@@ -121,7 +121,7 @@
                     </tr>
                     <tr>
                         <td> 
-                            <input type="email" id="emailField" name="email" onkeyup="checkEmail()">
+                            <input type="email" id="emailField" name="email" oninput="checkEmail()">
                         </td>
                     </tr>
                     <tr id="emailErrorRow" style="display: none">
@@ -134,7 +134,7 @@
                     </tr>
                     <tr>
                         <td>
-                            <input type="password" id="passwordField" name="password" onkeyup="checkPassword()" >
+                            <input type="password" id="passwordField" name="password" oninput="checkPassword()" >
                         </td>
                     </tr>
                     <tr>
@@ -221,8 +221,8 @@
             }
 
             function checkPassword(){
-                console.log(document.getElementById("emailField").value);
-                console.log(document.getElementById("passwordField").value);
+                // console.log(document.getElementById("emailField").value);
+                // console.log(document.getElementById("passwordField").value);
             }
 
             function test(){
@@ -231,7 +231,7 @@
 
             function register(){
                 var emailError = document.getElementById("emailError").innerHTML;
-                var usernameError = document.getElementById("emailError").innerHTML;
+                var usernameError = document.getElementById("usernameError").innerHTML;
                 var samePass = document.getElementById("passwordField").value === 
                                 document.getElementById("confirmPasswordField").value;
                 if(usernameError !== " " || emailError !== " " || !samePass){
@@ -242,10 +242,10 @@
                         error += (usernameError + "\n");
                     }
                     if(emailError !== " "){
-                        error += (usernameError + "\n");
+                        error += (emailError + "\n");
                     }
                     if(!samePass){
-                        error += "Password and Confirm Password not same\n"
+                        error += "Password and confirm password not same!\n"
                     }
                     alert("ERROR!\n" + error);
                     return false;
