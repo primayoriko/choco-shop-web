@@ -16,21 +16,22 @@
         $username = trim($_POST["username"]);
         $password = trim($_POST["password"]);
 
-        $sql = "SELECT password_hash FROM users WHERE username = :username";
+        $sql = "SELECT * FROM users WHERE username = :username";
 
         $stmt = $pdo->prepare($sql);
         $stmt->bindParam(":username", $username);
 
         if($stmt->execute()){
             if($stmt->rowCount() === 1){
-                $password_hash = $stmt->fetch(PDO::FETCH_OBJ)->password_hash;
+                $user = $stmt->fetch(PDO::FETCH_OBJ);
                 // echo $password_hash;
-                if(password_verify($password, $password_hash)){
+                if(password_verify($password, $user->password_hash)){
                     ini_set('session.gc_maxlifetime', 1800);
                     ini_set('session.cookie_lifetime', 1800); 
                     session_start();
 
                     $_SESSION["username"] = $username;
+                    $_SESSION["isSuperuser"] = $user->is_superuser;
                     $_SESSION["loggedIn"] = true;
 
                     header("location: dashboard.php");
@@ -53,7 +54,7 @@
 <html>
     <head>
         <title>Register</title>
-        <link rel="stylesheet" href="static/styles/register.css" type="text/css">
+        <link rel="stylesheet" href="../public/css/register.css" type="text/css">
     </head>
     <body>
         <div class="spacer"></div>

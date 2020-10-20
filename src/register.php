@@ -87,7 +87,7 @@
 <html>
     <head>
         <title>Register</title>
-        <link rel="stylesheet" href="static/styles/register.css" type="text/css">  
+        <link rel="stylesheet" href="../public/css/register.css" type="text/css">  
     </head>
     <body>
         <div class="spacer"></div>
