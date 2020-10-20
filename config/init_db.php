@@ -19,9 +19,9 @@ $sql = "CREATE TABLE users (
         )";
 
 if ($conn->query($sql) === TRUE){
-    echo "users table successfully created";
+    echo "users table successfully created\n";
 } else {
-    echo "ERROR create table users";
+    echo "ERROR create table users\n";
 }
 
 $sql = "CREATE TABLE chocolates ( 
@@ -40,15 +40,16 @@ if ($conn->query($sql) === TRUE){
 }
 
 $sql = "CREATE TABLE transactions ( 
-            id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+            -- id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
             username VARCHAR(50) NOT NULL,
-            choco_id INT(6) UNSIGNED NOT NULL,
+            chocolate_id INT(6) UNSIGNED NOT NULL,
             amount INT(10) UNSIGNED NOT NULL,
             totalprice INT(18) UNSIGNED NOT NULL,
             description TEXT,
             address TEXT NOT NULL,
             time DATETIME NOT NULL,
-            FOREIGN KEY (choco_id) REFERENCES chocolates(id),
+            PRIMARY KEY (username, chocolate_id, time),
+            FOREIGN KEY (chocolate_id) REFERENCES chocolates(id),
             FOREIGN KEY (username) REFERENCES users(username)
         )";
 

@@ -39,11 +39,13 @@ td input {
 
 th {
     padding-top: 10px;
+    padding: 20px 0;
 }
 
 th button {
     margin-top: 10px;
     width: 99.5%;
+    padding: 20px 0;
     text-align: center;
 }
 

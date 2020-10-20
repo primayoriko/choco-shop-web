@@ -1,9 +1,20 @@
+<?php
+    require_once "config/db_config.php";
+
+    $username = "";
+    $password = "";
+    $email = "";
+
+    if($_SERVER["REQUEST_METHOD"] === "POST"){
+
+    }
+?>
+
 <!DOCTYPE html>
 <html>
     <head>
         <title>Register</title>
-        <link rel="stylesheet" href="../static/styles/register.css" type="text/css">
-        <!-- <style><?php include "static/styles/register.css"; ?> </style> -->
+        <link rel="stylesheet" href="static/styles/register.css" type="text/css">
     </head>
     <body>
         <div class="spacer"></div>
@@ -11,23 +22,23 @@
             Willy Wangky Choco Factory
         </header>
         <div class="spacer"></div>
+        <div class="errorMessage">
+            
+        </div>
         <main>
-            <form  action="/">
+            <form id="login" action="login.php">
                 <table>
                     <tr>
                         <th>Username</th>
                     </tr>
                     <tr>
                         <td>
-                            <input name="username">
+                            <input id="usernameField" name="username" onkeyup="checkUsername()">
                         </td>
                     </tr>
-                    <tr>
-                        <th>Email</th>
-                    </tr>
-                    <tr>
+                    <tr id="usernameErrorRow" style="display: none">
                         <td>
-                            <input name="email">
+                            <p id="usernameError"> </p>
                         </td>
                     </tr>
                     <tr>
@@ -35,21 +46,13 @@
                     </tr>
                     <tr>
                         <td>
-                            <input name="password">
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>Confirm Password</th>
-                    </tr>
-                    <tr>
-                        <td>
-                            <input name="confirm_password">
+                            <input type="password" id="passwordField" name="passwordField" onkeyup="checkPassword()" >
                         </td>
                     </tr>
                     <tr>
                         <th>
-                            <button>
-                                Register!
+                            <button type="submit" form="login">
+                                Login
                             </button>
                         </th>
                     </tr>
@@ -57,8 +60,8 @@
             </form>
         </main>
         <div class="spacer"></div>
-        <!-- <footer>
-            footer
-        </footer> -->
+        <script>
+
+        </script>    
     </body>
 </html>
