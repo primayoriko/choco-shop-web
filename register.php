@@ -166,7 +166,6 @@
             function checkEmail(){
                 var emailCheck;
                 const email = document.getElementById("emailField").value;
-                // console.log(email);
 
                 if(window.XMLHttpRequest){
                     emailCheck = new XMLHttpRequest();
