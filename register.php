@@ -76,7 +76,7 @@
         <div class="spacer"></div>
         <main>
             this is main
-            <form  action="/">
+            <form id="register" action="register.php" method="POST" onsubmit="lastCheck()">
                 <table>
                     <tr>
                         <th>Username</th>
@@ -122,7 +122,7 @@
                     </tr>
                     <tr>
                         <th>
-                            <button>
+                            <button button type="submit" form="register" value="Submit">
                                 Register!
                             </button>
                         </th>
@@ -134,6 +134,8 @@
         <script>
             function checkUsername(){
                 var usernameCheck;
+                const username = document. getElementById("usernameField").innerHTML;
+
                 if(window.XMLHttpRequest){
                     usernameCheck = new XMLHttpRequest();
                 } else {
@@ -141,29 +143,23 @@
                 }
 
                 usernameCheck.onreadystatechange = function() {
-                    if (this.readyState == 4 && this.status == 200) {
-                        document.getElementById("usernameField").innerHTML =
-                        this.responseText;
+                    if(this.readyState === 4){
+                        if (this.status == 200) {
+                            document.getElementById("usernameField").style.borderColor = "green";
+                            document.getElementById("usernameField").style.borderWidth = "3px";
+                            document.getElementById("usernameErrorRow").style.display = "none";
+                        } else if (this.status == 400) {
+                            document. getElementById("usernameField").style.borderColor = "red";
+                            document.getElementById("usernameField").style.borderWidth = "3px";
+                            document.getElementById("usernameErrorRow").style.display = "block";
+                            document.getElementById("usernameError").innerHTML = "username already taken!";
+                        }
                     }
                 };
 
-                usernameCheck.open("POST", "check_username.php", true);
+                usernameCheck.open("GET", `check_availability.php?username=${username}`, true);
                 usernameCheck.send();
             }
-
-            // function checking(){
-            //     alert(1);
-            //     console.log('asdasdas');
-            //     if (Math.floor(Math.random() * Math.floor(2))) {
-            //         alert(1);
-            //         document.getElementById("emailField").style.borderColor = "green";
-            //         document.getElementById("emailErrorRow").style.display = "none";
-            //     } else {
-            //         document. getElementById("emailField").style.borderColor = "red";
-            //         document.getElementById("emailErrorRow").style.display = "block";
-            //         document.getElementById("emailError").innerHTML = "Email already taken!";
-            //     }
-            // }
             
             function checkEmail(){
                 var emailCheck;
