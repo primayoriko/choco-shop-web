@@ -1,45 +1,48 @@
 <?php
     require_once "config/db_config.php";
+    
+    $error_message = "";
+    $success_message = "";
+    $show_error_message = "none";
+    $show_success_message = "none";
 
     if($_SERVER["REQUEST_METHOD"] === "POST"){
-        $password = trim($_POST["password"]);
-        $email = trim($_POST["email"]);
-        $username = trim($_POST["username"]);
+        try{
+            $password = trim($_POST["password"]);
+            $email = trim($_POST["email"]);
+            $username = trim($_POST["username"]);
 
-        $email_regex = "/[a-zA-Z0-9_-.+]+@[a-zA-Z0-9-]+.[a-zA-Z]+/";
-        $username_regex = "/[a-zA-Z0-9_]+/";
-        $password_regex = "/[a-zA-Z0-9_@!-+.*%^#=]+/";
+            $email_regex = "/[a-zA-Z0-9_\-.]+@[a-zA-Z0-9\-]+.[a-zA-Z]+/";
+            $username_regex = "/[a-zA-Z0-9_]+/";
+            $password_regex = "/[a-zA-Z0-9_\-@!#]+/";
+            // $password_regex = "/[a-zA-Z0-9_@!\$\-\+\.\*%\^#=]+/";
 
-        $match_email = preg_match($email_regex, $email);
-        $match_username = preg_match($username_regex, $username);
-        $match_password = preg_match($password_regex, $password);
+            $match_email = preg_match($email_regex, $email);
+            $match_username = preg_match($username_regex, $username);
+            $match_password = preg_match($password_regex, $password);
 
-        $error_message = "";
-        $success_message = "";
+            if(strlen($username) > 0
+                && strlen($email) > 0
+                && strlen($password) > 0
+                && $match_email 
+                && $match_username
+                && $match_password
+                ){
+                
+                $hash_options = [
+                    'cost' => 10
+                ];
+                $password_hash = password_hash($password, PASSWORD_BCRYPT, $hash_options);
+                $is_superuser = 0;
 
-        if(strlen($username) > 0
-            && strlen($email) > 0
-            && strlen($password) > 0
-            && $match_email 
-            && $match_username
-            && $match_password
-            ){
-            
-            $hash_options = [
-                'cost' => 10
-            ];
-            $password_hash = password_hash($password, PASSWORD_BCRYPT, $hash_options);
-            $superuser = false;
+                $sql = "INSERT INTO users (username, email, password_hash, is_superuser)
+                        VALUES (:username, :email, :password_hash, :is_superuser)";
 
-            $sql = "INSERT INTO users (username, email, password_hash, superuser)
-                    VALUES (:username, :email, :password_hash, :superuser)";
-
-            try {
                 $stmt = $pdo->prepare($sql);
                 $stmt->bindParam(":username", $username);
                 $stmt->bindParam(":email", $username);
                 $stmt->bindParam(":password_hash", $password_hash);
-                $stmt->bindParam(":superuser", $superuser);
+                $stmt->bindParam(":is_superuser", $is_superuser);
 
                 if($stmt->execute()){
                     $success_message .= "User has been created successfully.\n";
@@ -47,21 +50,27 @@
                 else {
                     // 
                 }
-            } catch (PDOException $db_error){
-                $error_message .= $db_error->getMessage();
-            }
-        } 
-        else {
-            if(strlen($username) == 0 || !$match_username ){
-                $error_message .= "username contains error\n";
-            }
-            if(strlen($email) == 0 || !$match_email ){
-                $error_message .= "email contains error\n";
-            }
-            if(strlen($password) == 0 || !$match_password ){
-                $error_message .= "password contains error\n";
+            } 
+            else {
+                if(strlen($username) == 0 || !$match_username ){
+                    $error_message .= "username contains error\n";
+                }
+                if(strlen($email) == 0 || !$match_email ){
+                    $error_message .= "email contains error\n";
+                }
+                if(strlen($password) == 0 || !$match_password ){
+                    $error_message .= "password contains error\n";
+                }
             }
         }
+        catch(PDOException $db_error){
+            $error_message .= $db_error->getMessage() . "\n";
+        }
+        catch(Exception $err){
+            $error_message .= $err->getMessage() . "\n";
+        }
+
+        
         if(!empty($error_message)){
             $error_message = "Error(s) found:\n" . $error_message;
         }
@@ -84,11 +93,11 @@
             Willy Wangky Choco Factory
         </header>
         <div class="spacer"></div>
-        <div class="successMessage" style="display: <?php ?>">
-            <?php $error_message ?>
+        <div class="successMessage">
+            <?php echo $success_message ?>
         </div>
         <div class="errorMessage">
-            <?php $error_message ?>
+            <?php echo $error_message ?>
         </div>
         <main>
             Register
@@ -125,7 +134,7 @@
                     </tr>
                     <tr>
                         <td>
-                            <input type="password" id="passwordField" name="passwordField" onkeyup="checkPassword()" >
+                            <input type="password" id="passwordField" name="password" onkeyup="checkPassword()" >
                         </td>
                     </tr>
                     <tr>

@@ -14,8 +14,8 @@ if($conn->connect_error){
 $sql = "CREATE TABLE users ( 
             username VARCHAR(50) PRIMARY KEY,
             email VARCHAR(100) UNIQUE NOT NULL,
-            passwordhash VARCHAR(100) NOT NULL,
-            superuser BOOLEAN NOT NULL
+            password_hash VARCHAR(100) NOT NULL,
+            is_superuser BOOLEAN NOT NULL
         )";
 
 if ($conn->query($sql) === TRUE){
