@@ -122,7 +122,7 @@
                     </tr>
                     <tr>
                         <th>
-                            <button button type="submit" form="register" value="Submit">
+                            <button type="submit" form="register" value="Submit" onclick="return register()" >
                                 Register!
                             </button>
                         </th>
@@ -149,7 +149,7 @@
                             document.getElementById("usernameField").style.borderColor = "green";
                             document.getElementById("usernameField").style.borderWidth = "3px";
                             document.getElementById("usernameErrorRow").style.display = "none";
-                            document.getElementById("usernameError").innerHTML = "";
+                            document.getElementById("usernameError").innerHTML = " ";
                         } else {
                             document. getElementById("usernameField").style.borderColor = "red";
                             document.getElementById("usernameField").style.borderWidth = "3px";
@@ -181,7 +181,7 @@
                             document.getElementById("emailField").style.borderColor = "green";
                             document.getElementById("emailField").style.borderWidth = "3px";
                             document.getElementById("emailErrorRow").style.display = "none";
-                            document.getElementById("emailError").innerHTML = "";
+                            document.getElementById("emailError").innerHTML = " ";
                             console.log();
                         } else {
                             document. getElementById("emailField").style.borderColor = "red";
@@ -206,30 +206,29 @@
             }
 
             function register(){
-                // var emailError = document.getElementById("emailError");
-                // var usernameError = document.getElementById("emailError");
-                // var emailError = "asdas";
-                // var usernameError = "asdas";
+                var emailError = document.getElementById("emailError").innerHTML;
+                var usernameError = document.getElementById("emailError").innerHTML;
                 var samePass = document.getElementById("passwordField").value === 
                                 document.getElementById("confirmPasswordField").value;
-                if(!samePass){
-                    console.log("yoa");
-                // if(usernameError !== null || emailError !== null || !samePass){
+                if(usernameError !== " " || emailError !== " " || !samePass){
                     var error = "";
-                    // if(usernameError !== null){
-                    //     error += usernameError.innerHTML + "\n";
-                    // }
-                    // if(emailError !== null){
-                    //     error += usernameError.innerHTML + "\n";
-                    // }
+                    console.log(usernameError.innerHTML === " ");
+                    console.log(typeof usernameError.innerHTML);
+                    if(usernameError !== " "){
+                        error += (usernameError + "\n");
+                    }
+                    if(emailError !== " "){
+                        error += (usernameError + "\n");
+                    }
                     if(!samePass){
                         error += "Password and Confirm Password not same\n"
                     }
                     alert("ERROR!\n" + error);
+                    return false;
                 }
                 else{
-                    console.log("sadasd");
                     document.getElementById("register").submit();
+                    return true;
                 }
             }
         </script>
