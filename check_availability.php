@@ -13,21 +13,18 @@ if($_SERVER["REQUEST_METHOD"] === "GET"){
             if($stm->execute()){
                 if($stm->rowCount() === 1){
                     $return = array(
-                        'status' => 400,
                         'message' => "Bad request"
                     );
                     http_response_code(400);
                 } else {
                     $return = array(
-                        'status' => 200,
-                        'message' => ""
+                        'message' => "Available"
                     );
                     http_response_code(200);
                 }
             } 
             else {
                 $return = array(
-                    'status' => 500,
                     'message' => "Internal server error"
                 );
                 http_response_code(500);
@@ -35,7 +32,6 @@ if($_SERVER["REQUEST_METHOD"] === "GET"){
         } 
         else {
             $return = array(
-                'status' => 400,
                 'message' => "Bad request"
             );
             http_response_code(400);
@@ -51,21 +47,18 @@ if($_SERVER["REQUEST_METHOD"] === "GET"){
             if($stm->execute()){
                 if($stm->rowCount() === 1){
                     $return = array(
-                        'status' => 400,
-                        'message' => "Bad request"
+                        'message' => "Email already taken!"
                     );
                     http_response_code(400);
                 } else {
                     $return = array(
-                        'status' => 200,
-                        'message' => ""
+                        'message' => "Available"
                     );
                     http_response_code(200);
                 }
             } 
             else {
                 $return = array(
-                    'status' => 500,
                     'message' => "Internal server error"
                 );
                 http_response_code(500);
@@ -73,14 +66,12 @@ if($_SERVER["REQUEST_METHOD"] === "GET"){
         } 
         else {
             $return = array(
-                'status' => 400,
                 'message' => "Bad request"
             );
             http_response_code(400);
         }
     } else {
         $return = array(
-            'status' => 400,
             'message' => "Bad request"
         );
         http_response_code(400);

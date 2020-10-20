@@ -39,10 +39,10 @@
             $password = trim($_POST["password"]);
         }
 
-        if(empty(trim($_POST["confirm_password"]))){
+        if(empty(trim($_POST["confirmPassword"]))){
             $confirm_pass_err = "please input confirmation of the password";
         }
-        else if($_POST["password"] !== $_POST["corfirm_password"]
+        else if($_POST["password"] !== $_POST["corfirmPassword"]
             && empty($password_err)){
             $confirm_pass_err = "the inputted string not same";
         }
@@ -76,14 +76,14 @@
         <div class="spacer"></div>
         <main>
             this is main
-            <form id="register" action="register.php" method="POST" onsubmit="lastCheck()">
+            <form id="register" action="register.php" method="POST" onsubmit="register()">
                 <table>
                     <tr>
                         <th>Username</th>
                     </tr>
                     <tr>
                         <td>
-                            <input id="usernameField" name="username" onkeyup="usernameCheck()">
+                            <input id="usernameField" name="username" onkeyup="checkUsername()">
                         </td>
                     </tr>
                     <tr id="usernameErrorRow" style="display: none">
@@ -109,7 +109,7 @@
                     </tr>
                     <tr>
                         <td>
-                            <input name="password" type="password">
+                            <input type="password" id="passwordField" name="passwordField" onkeyup="checkPassword()" >
                         </td>
                     </tr>
                     <tr>
@@ -117,7 +117,7 @@
                     </tr>
                     <tr>
                         <td>
-                            <input name="confirm_password" type="password">
+                            <input type="password" id="confirmPasswordField" name="confirmPassword">
                         </td>
                     </tr>
                     <tr>
@@ -134,7 +134,7 @@
         <script>
             function checkUsername(){
                 var usernameCheck;
-                const username = document. getElementById("usernameField").innerHTML;
+                const username = document. getElementById("usernameField").value;
 
                 if(window.XMLHttpRequest){
                     usernameCheck = new XMLHttpRequest();
@@ -144,15 +144,17 @@
 
                 usernameCheck.onreadystatechange = function() {
                     if(this.readyState === 4){
-                        if (this.status == 200) {
+                        var responseBody = JSON.parse(this.responseText);
+                        if (this.status == 200 && responseBody.message === "Available") {
                             document.getElementById("usernameField").style.borderColor = "green";
                             document.getElementById("usernameField").style.borderWidth = "3px";
                             document.getElementById("usernameErrorRow").style.display = "none";
-                        } else if (this.status == 400) {
+                            document.getElementById("usernameError").innerHTML = "";
+                        } else {
                             document. getElementById("usernameField").style.borderColor = "red";
                             document.getElementById("usernameField").style.borderWidth = "3px";
                             document.getElementById("usernameErrorRow").style.display = "block";
-                            document.getElementById("usernameError").innerHTML = "username already taken!";
+                            document.getElementById("usernameError").innerHTML = responseBody.message;
                         }
                     }
                 };
@@ -163,7 +165,8 @@
             
             function checkEmail(){
                 var emailCheck;
-                const email = document. getElementById("emailField").innerHTML;
+                const email = document.getElementById("emailField").value;
+                // console.log(email);
 
                 if(window.XMLHttpRequest){
                     emailCheck = new XMLHttpRequest();
@@ -173,15 +176,18 @@
 
                 emailCheck.onreadystatechange = function() {
                     if(this.readyState === 4){
-                        if (this.status == 200) {
+                        var responseBody = JSON.parse(this.responseText);
+                        if (this.status == 200 && responseBody.message === "Available") {
                             document.getElementById("emailField").style.borderColor = "green";
                             document.getElementById("emailField").style.borderWidth = "3px";
                             document.getElementById("emailErrorRow").style.display = "none";
-                        } else if (this.status == 400) {
+                            document.getElementById("emailError").innerHTML = "";
+                            console.log();
+                        } else {
                             document. getElementById("emailField").style.borderColor = "red";
                             document.getElementById("emailField").style.borderWidth = "3px";
                             document.getElementById("emailErrorRow").style.display = "block";
-                            document.getElementById("emailError").innerHTML = "Email already taken!";
+                            document.getElementById("emailError").innerHTML = responseBody.message;
                         }
                     }
                 };
@@ -190,8 +196,41 @@
                 emailCheck.send();
             }
 
-            function submit(){
+            function checkPassword(){
+                console.log(document.getElementById("emailField").value);
+                console.log(document.getElementById("passwordField").value);
+            }
 
+            function test(){
+
+            }
+
+            function register(){
+                // var emailError = document.getElementById("emailError");
+                // var usernameError = document.getElementById("emailError");
+                // var emailError = "asdas";
+                // var usernameError = "asdas";
+                var samePass = document.getElementById("passwordField").value === 
+                                document.getElementById("confirmPasswordField").value;
+                if(!samePass){
+                    console.log("yoa");
+                // if(usernameError !== null || emailError !== null || !samePass){
+                    var error = "";
+                    // if(usernameError !== null){
+                    //     error += usernameError.innerHTML + "\n";
+                    // }
+                    // if(emailError !== null){
+                    //     error += usernameError.innerHTML + "\n";
+                    // }
+                    if(!samePass){
+                        error += "Password and Confirm Password not same\n"
+                    }
+                    alert("ERROR!\n" + error);
+                }
+                else{
+                    console.log("sadasd");
+                    document.getElementById("register").submit();
+                }
             }
         </script>
     </body>
