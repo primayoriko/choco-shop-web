@@ -142,7 +142,12 @@
                     </tr>
                     <tr>
                         <td>
-                            <input type="password" id="confirmPasswordField" name="confirmPassword">
+                            <input type="password" id="confirmPasswordField" name="confirmPassword" oninput="checkPassword()">
+                        </td>
+                    </tr>
+                    <tr id="passwordErrorRow" style="display: none">
+                        <td>
+                            <p id="passwordError"> </p>
                         </td>
                     </tr>
                     <tr>
@@ -206,7 +211,6 @@
                             document.getElementById("emailField").style.borderWidth = "3px";
                             document.getElementById("emailErrorRow").style.display = "none";
                             document.getElementById("emailError").innerHTML = " ";
-                            console.log();
                         } else {
                             document. getElementById("emailField").style.borderColor = "red";
                             document.getElementById("emailField").style.borderWidth = "3px";
@@ -221,31 +225,43 @@
             }
 
             function checkPassword(){
-                // console.log(document.getElementById("emailField").value);
-                // console.log(document.getElementById("passwordField").value);
-            }
+                var password = document.getElementById("passwordField").value;
+                var confirmPassword = document.getElementById("confirmPasswordField").value;
 
-            function test(){
-
+                if(password === confirmPassword){
+                    document.getElementById("passwordField").style.borderColor = "green";
+                    document.getElementById("passwordField").style.borderWidth = "3px";
+                    document.getElementById("confirmPasswordField").style.borderColor = "green";
+                    document.getElementById("confirmPasswordField").style.borderWidth = "3px";
+                    document.getElementById("passwordErrorRow").style.display = "none";
+                    document.getElementById("passwordError").innerHTML = " ";
+                }
+                else{
+                    document. getElementById("passwordField").style.borderColor = "red";
+                    document.getElementById("passwordField").style.borderWidth = "3px";
+                    document. getElementById("confirmPasswordField").style.borderColor = "red";
+                    document.getElementById("confirmPasswordField").style.borderWidth = "3px";
+                    document.getElementById("passwordErrorRow").style.display = "block";
+                    document.getElementById("passwordError").innerHTML = "Password and confirm password not same!";
+                }
             }
 
             function register(){
                 var emailError = document.getElementById("emailError").innerHTML;
                 var usernameError = document.getElementById("usernameError").innerHTML;
-                var samePass = document.getElementById("passwordField").value === 
-                                document.getElementById("confirmPasswordField").value;
-                if(usernameError !== " " || emailError !== " " || !samePass){
+                var passwordError = document.getElementById("passwordError").innerHTML;
+                if(usernameError !== " " || emailError !== " " || passwordError !== " "){
                     var error = "";
-                    console.log(usernameError.innerHTML === " ");
-                    console.log(typeof usernameError.innerHTML);
+                    // console.log(usernameError.innerHTML === " ");
+                    // console.log(typeof usernameError.innerHTML);
                     if(usernameError !== " "){
                         error += (usernameError + "\n");
                     }
                     if(emailError !== " "){
                         error += (emailError + "\n");
                     }
-                    if(!samePass){
-                        error += "Password and confirm password not same!\n"
+                    if(passwordError !== " "){
+                        error += (passwordError + "\n");
                     }
                     alert("ERROR!\n" + error);
                     return false;
