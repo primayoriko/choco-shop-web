@@ -1,10 +1,7 @@
 <?php
 
 // Creds for DB
-define('DB_SERVER', 'localhost');
-define('DB_USERNAME', 'root');
-define('DB_PASSWORD', 'root');
-define('DB_NAME', 'wbd1');
+require_once('db_keys.php');
 
 try {
     $pdo = new PDO("mysql:host=" . DB_SERVER .
