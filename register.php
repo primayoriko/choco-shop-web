@@ -64,10 +64,12 @@
             }
         }
         catch(PDOException $db_error){
-            $error_message .= $db_error->getMessage() . "\n";
+            // $error_message .= $db_error->getMessage() . "\n";
+            $error_message .= "Internal server error\n";
         }
         catch(Exception $err){
-            $error_message .= $err->getMessage() . "\n";
+            // $error_message .= $err->getMessage() . "\n";
+            $error_message .= "Internal server error\n";
         }
 
         

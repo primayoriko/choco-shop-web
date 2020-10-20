@@ -1,4 +1,6 @@
 <?php
+    ini_set('session.gc_maxlifetime', 1800); // Cookie time 10 sec
+    ini_set('session.cookie_lifetime', 1800); 
     session_start();
 
     if(isset($_SESSION["loggedIn"]) && $_SESSION["loggedIn"]){
@@ -22,19 +24,27 @@
         if($stmt->execute()){
             if($stmt->rowCount() === 1){
                 $password_hash = $stmt->fetch(PDO::FETCH_OBJ)->password_hash;
-                echo $password_hash;
+                // echo $password_hash;
                 if(password_verify($password, $password_hash)){
+                    ini_set('session.gc_maxlifetime', 1800);
+                    ini_set('session.cookie_lifetime', 1800); 
+                    session_start();
 
-                } else {
+                    $_SESSION["username"] = $username;
+                    $_SESSION["loggedIn"] = true;
 
+                    header("location: dashboard.php");
+                } 
+                else {
+                    $error_message = "Between username or password is wrong/not exist\n";
                 }
             }
             else {
-
+                $error_message = "Between username or password is wrong/not exist\n";
             }
         }
         else{
-
+            $error_message = "Internal server error\n";
         }
     }
 ?>
