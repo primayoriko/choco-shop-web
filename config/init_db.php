@@ -1,7 +1,7 @@
 <?php
 
 // Connection query change as your own needs
-require_once('db_keys.php');
+require_once('db_keys.config.php');
 
 
 // Using mysqli
