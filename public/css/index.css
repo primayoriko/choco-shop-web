@@ -1,0 +1,118 @@
+/* =================================================================== 
+ * Base Stylesheet
+ * ------------------------------------------------------------------
+ *
+ *  TOC:
+ *      # A. Custom Normalize
+ *      # B. Typography
+ *
+ * =================================================================== */
+
+/* ===================================================================
+ * # A. Custom Normalize
+ * ------------------------------------------------------------------- */
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: var(--primary1);
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+*,
+*:before,
+*:after {
+  -webkit-box-sizing: inherit;
+  -moz-box-sizing: inherit;
+  box-sizing: inherit;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  margin: 0;
+}
+
+a {
+  color: inherit;
+  background-color: transparent;
+  text-decoration: none !important;
+}
+
+a:hover {
+  color: inherit;
+}
+
+main {
+  display: block;
+  height: 100%;
+}
+
+article,
+aside,
+footer,
+header,
+nav,
+section {
+  display: block;
+}
+
+/* # End of Normalize
+     * ----------------------- */
+
+/* ===================================================================
+     * # B. Typography
+     * ------------------------------------------------------------------- */
+html {
+  /* Base font size = 10px */
+  font-size: 62.5%;
+  /* font-family: Lato; */
+}
+
+/* # End of Typography
+     * ----------------------- */
+
+/* ===================================================================
+     * # C. Color
+     * ------------------------------------------------------------------- */
+:root {
+  /* $ VARIABLES */
+  /* > Sizes */
+  /* --container-border-width: 3px;
+      --container-border-radius: 2rem;
+      --elm-border-radius: 1rem; */
+
+  /* > Colors */
+
+  /* 1> Primary: Abu muda ke pink*/
+  --primary: #2d2831;
+  --primary2: #453b4d;
+  --primary-light1: pink;
+
+  /*  1> Secondary: Orange Sunset */
+  --secondary1: #dd7e3e;
+  --secondary2: #d48748;
+  --secondary-dark1: #643713;
+  --secondary-dark2: #7e3f0b;
+
+  /* 1> Accent: Soft Blue */
+  --accent1: #263aee;
+  --accent2: #6886e7;
+  --black-true: #000;
+
+  /* background-color: var(--primary); */
+}
+/* # End of Typography
+     * ----------------------- */

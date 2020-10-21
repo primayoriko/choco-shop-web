@@ -10,10 +10,12 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Register</title>
-        <link rel="stylesheet" href="../public/css/register.css" type="text/css">
+        <title>Willy Wangky Chocolate Factory</title>
+        <link rel="stylesheet" href="../public/css/index.css" type="text/css">
+        <link rel="stylesheet" href="../public/css/dashboard.css" type="text/css">
     </head>
     <body>
+
         <div class="spacer"></div>
         <header>
             Willy Wangky Choco Factory

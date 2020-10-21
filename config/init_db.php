@@ -1,14 +1,20 @@
 <?php
 
-// Connection query change as your own needs
 require_once('db_keys.config.php');
-
 
 // Using mysqli
 $conn = new mysqli(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_NAME);
 
 if($conn->connect_error){
     die("conn failed: " . $conn->connect_error);
+}
+
+$sql = " DROP TABLE IF EXISTS users, chocolates, transactions";
+
+if ($conn->query($sql) === TRUE){
+    echo "existing table(s) already deleted\n";
+} else {
+    echo "ERROR when try to delete existing table(s)\n";
 }
 
 $sql = "CREATE TABLE users ( 

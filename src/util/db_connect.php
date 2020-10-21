@@ -1,7 +1,6 @@
 <?php
 
-// Creds for DB
-require_once('../../config/db_keys.config.php');
+require_once(__DIR__.'/../../config/db_keys.config.php');
 
 try {
     $pdo = new PDO("mysql:host=" . DB_SERVER .
