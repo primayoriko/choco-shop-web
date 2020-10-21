@@ -37,7 +37,7 @@
                     header("location: dashboard.php");
                 } 
                 else {
-                    $error_message = "Between username or password is wrong/not exist\n";
+                    $error_message = "Between username or password is wrong/not exist asdas\n";
                 }
             }
             else {

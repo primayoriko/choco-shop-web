@@ -1,6 +1,6 @@
 <?php
 
-require_once "db_connect.php";
+require_once __DIR__ . "/db_connect.php";
 
 if($_SERVER["REQUEST_METHOD"] === "GET"){
     if(isset($_GET["username"])){
