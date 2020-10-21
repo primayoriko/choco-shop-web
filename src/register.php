@@ -1,5 +1,5 @@
 <?php
-    require_once "config/db_config.php";
+    require_once "util/db_connect.php";
     
     $error_message = "";
     $success_message = "";
