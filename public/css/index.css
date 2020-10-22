@@ -7,24 +7,18 @@
  *      # B. Typography
  *
  * =================================================================== */
-
 /* ===================================================================
  * # A. Custom Normalize
  * ------------------------------------------------------------------- */
-
+html,
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  background-color: var(--primary1);
-}
-
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-    monospace;
+  padding: 0;
+  height: 100%;
+  max-width: 100%;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 html {
@@ -35,7 +29,6 @@ html {
 *:before,
 *:after {
   -webkit-box-sizing: inherit;
-  -moz-box-sizing: inherit;
   box-sizing: inherit;
   margin: 0;
   padding: 0;
@@ -70,29 +63,24 @@ section {
 }
 
 /* # End of Normalize
-     * ----------------------- */
-
+   * ----------------------- */
 /* ===================================================================
-     * # B. Typography
-     * ------------------------------------------------------------------- */
+   * # B. Typography
+   * ------------------------------------------------------------------- */
 html {
-  /* Base font size = 10px */
   font-size: 62.5%;
-  /* font-family: Lato; */
 }
 
-/* # End of Typography
-     * ----------------------- */
+.text-title {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 20px;
+}
 
 /* ===================================================================
-     * # C. Color
+     * # C. Variables
      * ------------------------------------------------------------------- */
 :root {
   /* $ VARIABLES */
-  /* > Sizes */
-  /* --container-border-width: 3px;
-      --container-border-radius: 2rem;
-      --elm-border-radius: 1rem; */
 
   /* > Colors */
 
@@ -114,5 +102,5 @@ html {
 
   /* background-color: var(--primary); */
 }
-/* # End of Typography
+/* # End of Variables
      * ----------------------- */
