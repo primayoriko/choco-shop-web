@@ -1,12 +1,59 @@
+@import './index.css';
+
 .page-title {
-  box-sizing: border-box;
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  margin: 1rem 0;
+  align-items: flex-start;
+  margin: 1rem 0 3rem;
 }
 
-.top-content {
+.choco-container {
   display: flex;
+  flex-direction: row;
+
+}
+
+.choco-image {
+  border: solid 2px brown;
+  border-radius: 1rem;
+  width: 200px;
+  height: 300px;
+  padding: 1rem;
+  margin: 0 2rem 0 0;
+}
+
+.choco-right {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  justify-content: space-between;
+}
+
+.choco-props > * {
+  margin: 1.5rem 0 0;
+}
+
+.choco-title {
+  margin: 0;
+}
+
+.choco-desc {
+  margin: 0.5rem 0;
+}
+
+.amount-modifier {
+  display: flex;
+  flex-direction: column; 
+}
+
+.btn-group {
+  display: flex;
+  flex-direction: row;
+  align-self: flex-end;
+  flex-grow: 1;
+  margin-top: 10rem;
+}
+
+.btn-group > button {
+  margin: 0 1rem;
 }

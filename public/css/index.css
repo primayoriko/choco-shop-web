@@ -3,11 +3,25 @@
  * ------------------------------------------------------------------
  *
  *  TOC:
+ *      # i. Imports
  *      # A. Custom Normalize
  *      # B. Typography
+ *      # C. Global Classes
+ *      # D. Colors
  *
  * =================================================================== */
-/* ===================================================================
+
+/* * ===================================================================
+   * # i. Imports
+   * ------------------------------------------------------------------- */
+  
+@import './buttons.css';
+
+  /* * ===================================================================
+       * # C. Variables
+       * ------------------------------------------------------------------- */
+
+ /* ===================================================================
  * # A. Custom Normalize
  * ------------------------------------------------------------------- */
 html,
@@ -64,7 +78,7 @@ section {
 
 /* # End of Normalize
    * ----------------------- */
-/* ===================================================================
+/* * ===================================================================
    * # B. Typography
    * ------------------------------------------------------------------- */
 html {
@@ -73,10 +87,20 @@ html {
 
 .text-title {
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-  font-size: 20px;
+  font-size: 22px;
 }
 
-/* ===================================================================
+.text-subtitle {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 16px;
+}
+
+.text-content {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 14px;
+}
+
+/* * ===================================================================
      * # C. Variables
      * ------------------------------------------------------------------- */
 :root {
@@ -85,20 +109,20 @@ html {
   /* > Colors */
 
   /* 1> Primary: Abu muda ke pink*/
-  --primary: #2d2831;
+  /* --primary: #2d2831;
   --primary2: #453b4d;
-  --primary-light1: pink;
+  --primary-light1: pink; */
 
   /*  1> Secondary: Orange Sunset */
-  --secondary1: #dd7e3e;
+  /* --secondary1: #dd7e3e;
   --secondary2: #d48748;
   --secondary-dark1: #643713;
-  --secondary-dark2: #7e3f0b;
+  --secondary-dark2: #7e3f0b; */
 
   /* 1> Accent: Soft Blue */
-  --accent1: #263aee;
+  /* --accent1: #263aee;
   --accent2: #6886e7;
-  --black-true: #000;
+  --black-true: #000; */
 
   /* background-color: var(--primary); */
 }
@@ -109,9 +133,15 @@ html {
 * # D. Global classes
 * ------------------------------------------------------------------- */
 .container {
-  padding: 4rem 6rem;
+  padding: 2rem 6rem;
   display: flex;
+  flex-direction: column;
+  flex-grow: 1;
 }
+
+
+
+
 
 /* # End of Variables
      * ----------------------- */
