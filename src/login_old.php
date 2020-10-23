@@ -1,27 +1,53 @@
 <?php
-    ['is_valid_token' => $is_valid_token ] = require 'utils/authentication.php';
-    ['make_token' => $make_token ] = require 'utils/authentication.php';
-    ['connect_db' => $connect_db ] = require 'utils/db_connect.php';
+    ini_set('session.gc_maxlifetime', 1800); // Cookie time 10 sec
+    ini_set('session.cookie_lifetime', 1800); 
+    session_start();
 
-    if(isset($_COOKIE["loginSession"]) &&  
-        $is_valid_token($_COOKIE["loginSession"])){
+    if(isset($_SESSION["loggedIn"]) && $_SESSION["loggedIn"]){
         header("location: dashboard.php");
         exit;
     }
+
+    require_once "utils/db_connect.php";
 
     $error_message = "";
 
     if($_SERVER["REQUEST_METHOD"] === "POST"){
         $username = trim($_POST["username"]);
         $password = trim($_POST["password"]);
-        try{
-            $token = $make_token($username, $password);
-        } catch (Exception $error){
-            $error_message = $error->getMessage();
-        }
 
+        $sql = "SELECT * FROM users WHERE username = :username";
+
+        $stmt = $pdo->prepare($sql);
+        $stmt->bindParam(":username", $username);
+
+        if($stmt->execute()){
+            if($stmt->rowCount() === 1){
+                $user = $stmt->fetch(PDO::FETCH_OBJ);
+                // echo $password_hash;
+                if(password_verify($password, $user->password_hash)){
+                    ini_set('session.gc_maxlifetime', 1800);
+                    ini_set('session.cookie_lifetime', 1800); 
+                    session_start();
+
+                    $_SESSION["username"] = $username;
+                    $_SESSION["isSuperuser"] = $user->is_superuser;
+                    $_SESSION["loggedIn"] = true;
+
+                    header("location: dashboard.php");
+                } 
+                else {
+                    $error_message = "Between username or password is wrong/not exist asdas\n";
+                }
+            }
+            else {
+                $error_message = "Between username or password is wrong/not exist\n";
+            }
+        }
+        else{
+            $error_message = "Internal server error\n";
+        }
     }
-    
 ?>
 
 <!DOCTYPE html>

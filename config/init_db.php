@@ -9,7 +9,7 @@ if($conn->connect_error){
     die("conn failed: " . $conn->connect_error);
 }
 
-$sql = " DROP TABLE IF EXISTS users, chocolates, transactions";
+$sql = " DROP TABLE IF EXISTS users, chocolates, transactions, sessions";
 
 if ($conn->query($sql) === TRUE){
     echo "existing table(s) already deleted\n";
@@ -36,7 +36,7 @@ $sql = "CREATE TABLE chocolates (
             amount INT(10) UNSIGNED NOT NULL,
             price INT(12) UNSIGNED NOT NULL,
             description TEXT,
-            image LONGBLOB
+            extension VARCHAR(10)
         )";
 
 if ($conn->query($sql) === TRUE){
@@ -66,6 +66,25 @@ if ($conn->query($sql) === TRUE){
     echo "transactions table successfully created\n";
 } else {
     echo "ERROR create table transactions\n";
+}
+
+$sql = "CREATE TABLE sessions ( 
+    hash_id VARCHAR(50) NOT NULL,
+    username VARCHAR(50) NOT NULL,
+    is_superuser BOOLEAN NOT NULL,
+    login_time DATETIME NOT NULL,
+    PRIMARY KEY (hash_id),
+    -- FOREIGN KEY (username, is_superuser) REFERENCES users(username, is_superuser)
+    FOREIGN KEY (username) REFERENCES users(username)
+)";
+
+// salah satu cara buat timestamp : 
+// reg_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+
+if ($conn->query($sql) === TRUE){
+    echo "sessions table successfully created\n";
+} else {
+    echo "ERROR create table sessions\n";
 }
 
 $conn->close();

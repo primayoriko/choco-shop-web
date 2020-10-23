@@ -1,6 +1,7 @@
 <?php
-    require_once "util/db_connect.php";
-    
+
+    ['connect_db' => $connect_db ] = require 'utils/db_connect.php';
+
     $error_message = "";
     $success_message = "";
     $show_error_message = "none";
@@ -37,6 +38,7 @@
 
                 $sql = "INSERT INTO users (username, email, password_hash, is_superuser)
                         VALUES (:username, :email, :password_hash, :is_superuser)";
+                $pdo = $connect_db();
 
                 $stmt = $pdo->prepare($sql);
                 $stmt->bindParam(":username", $username);
@@ -191,7 +193,7 @@
                     }
                 };
 
-                usernameCheck.open("GET", `util/check_availability.php?username=${username}`, true);
+                usernameCheck.open("GET", `utils/check_availability.php?username=${username}`, true);
                 usernameCheck.send();
             }
             
@@ -222,7 +224,7 @@
                     }
                 };
 
-                emailCheck.open("GET", `util/check_availability.php?email=${email}`, true);
+                emailCheck.open("GET", `utils/check_availability.php?email=${email}`, true);
                 emailCheck.send();
             }
 
