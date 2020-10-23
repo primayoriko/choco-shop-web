@@ -1,6 +1,7 @@
 header {
   height: 7rem;
   /* width: 100%; */
+  position: relative;
   padding: 2rem 3rem;
   display: flex;
   flex-direction: row;
@@ -23,6 +24,12 @@ header {
   align-items: center;
   color: white;
   font-weight: 700;
+}
+
+.header-search {
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, 0);
 }
 
 .header-menu {

@@ -16,8 +16,6 @@ if (!isset($_SESSION["loggedIn"]) || !$_SESSION["loggedIn"]) {
     <title>Willy Wangky Chocolate Factory</title>
     <link rel="stylesheet" href="../public/css/index.css" type="text/css">
     <link rel="stylesheet" href="../public/css/dashboard.css" type="text/css">
-    <!-- <link rel="stylesheet" href="../public/css/login.css" type="text/css"> -->
-    <!-- <link rel="stylesheet" href="../public/css/register.css" type="text/css"> -->
 </head>
 
 <body>

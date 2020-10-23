@@ -21,7 +21,7 @@
             }
             ?>
         </div>
-        <div class="header-comp">
+        <div class="header-comp header-search">
             Search Bar
         </div>
         <div class="header-comp header-menu" id="logoutButton">
