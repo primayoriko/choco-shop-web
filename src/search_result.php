@@ -12,17 +12,8 @@
         $transactions = $db->query($sql)->fetchAll();
     }
 
-    function getSold($id, $transactions) {
-        $countSold = 0;
-        foreach ($transactions as $transaction) {
-            if ($transaction['chocolate_id'] === $id) {
-                $countSold += $transaction['amount'];
-            }
-        }
-        return $countSold;
-    }
-
     include('components/choco_card_long.php');
+    include('utils/utility.php');
 ?>
 
 <!DOCTYPE html>
