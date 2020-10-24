@@ -1,6 +1,5 @@
 <?php
-    ['connect_db' => $connect_db ] = require 'db_connect.php';
-
+    ['connect_db' => $connect_db ] = require __DIR__ . '/db_connect.php';
 
     $validate_token = function($token){
         try{
@@ -105,5 +104,9 @@
         
     };
 
-    return compact('validate_token', 'make_token');
+    $destroy_token = function($hash_id){
+
+    };
+
+    return compact('validate_token', 'make_token', 'destroy_token');
 ?>

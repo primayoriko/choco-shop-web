@@ -1,7 +1,10 @@
 <?php
-    session_start();
-    $_SESSION = array();
-    session_destroy();
+    ['destroy_token' => $destroy_token ] = require __DIR__ . '/authentication.php';
+
+    if(isset($_COOKIE['sessionID'])){
+        $destroy_token($_COOKIE['sessionID']);
+        setcookie('sessionID', '', time() - 3600);
+    }
 
     header("location: ../login.php");
     exit;
