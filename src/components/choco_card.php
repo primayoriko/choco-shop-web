@@ -17,7 +17,7 @@ function choco_card($choc)
         </a>
         <div class="card-desc">
             <a class="card-title text-title">' . $name . '</a>
-            <div class="card-amount text-content">Amount sold: ' . $amount . ' </div>
+            <div class="card-amount text-content">Amount sold: ' . $sold . ' </div>
             <div class="card-price text-content">Price: ' . $fprice . ' </div>
         </div>
     </div>');
