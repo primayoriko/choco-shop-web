@@ -40,3 +40,10 @@ header {
   background: rgb(233, 116, 143);
   color: white;
 }
+
+.search-bar {
+  border-radius: 1rem;
+  padding: 5px;
+  outline: none;
+  width: 30vw;
+}

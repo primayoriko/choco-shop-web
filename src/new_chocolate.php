@@ -1,64 +1,74 @@
 <?php
-function is_allowed_ext($file)
-{
-    $ext_type = array('gif', 'jpg', 'jpe', 'jpeg', 'png');
-}
 
-function is_allowed_size($file)
-{
-}
+    ['validate_token' => $validate_token ] = require 'utils/authentication.php';
+    ['make_token' => $make_token ] = require 'utils/authentication.php';
+    ['connect_db' => $connect_db ] = require 'utils/db_connect.php';
 
-function is_not_empty($file)
-{
-}
-
-session_start();
-
-// if (!isset($_SESSION["loggedIn"]) || !$_SESSION["loggedIn"]) {
-//     header("location: login.php");
-//     exit;
-// }
-
-// if (!isset($_SESSION["isSuperuser"]) || !$_SESSION["isSuperuser"]) {
-//     header("location: dashboard.php");
-//     exit;
-// }
-
-require_once(__DIR__ . '/../config/image_saving.config.php');
-
-$error_message = "";
-
-if ($_SERVER["REQUEST_METHOD"] === "POST") {
-    $name = $_POST["name"];
-    $price = $_POST["price"];
-    $description = $_POST["description"];
-    $amount = $_POST["amount"];
-    $extension = $_FILE["image"][""];
-
-    // ADD FILE CHECKING HERE IF NEEDED
-
-    $sql = "INSERT INTO chocolates(name, price, description, amount, extension),
-                    VALUES (:name, :price, :description, :amount, :extension)";
-
-    $stmt = $pdo->prepare($sql);
-    $stmt->bindParam(":name", $name);
-    $stmt->bindParam(":price", $price);
-    $stmt->bindParam(":description", $description);
-    $stmt->bindParam(":amount", $amount);
-    $stmt->bindParam(":extension", $extension);
-
-    if ($stmt->execute()) {
-        $id = $db->lastInsertId();
-        $new_filepath = __DIR__ . "/../" . CHOCO_IMG_DIR . $id . $file_ext;
-
-        if (move_uploaded_file($_FILES["image"]["tmp_name"], $new_filepath)) {
-        } else {
-        }
-    } else {
+    function is_allowed_ext($file)
+    {
+        $ext_type = array('gif', 'jpg', 'jpe', 'jpeg', 'png');
     }
 
-    $image = $_FILES["image"];
-}
+    function is_allowed_size($file)
+    {
+        
+    }
+
+    function is_not_empty($file)
+    {
+
+    }
+    
+    if(!isset($_COOKIE['sessionID'])){
+        header("location: login.php");
+        exit;
+    }
+
+    $session = $validate_token($_COOKIE['sessionID']);
+    if(!$session['is_valid']) {
+        header("location: login.php");
+        exit;
+    }
+    else if(!$session['is_superuser']){
+        header("location: dashboard.php");
+        exit;
+    }
+
+    require_once(__DIR__ . '/../config/image_saving.config.php');
+
+    $error_message = "";
+
+    if ($_SERVER["REQUEST_METHOD"] === "POST") {
+        $name = $_POST["name"];
+        $price = $_POST["price"];
+        $description = $_POST["description"];
+        $amount = $_POST["amount"];
+        $extension = $_FILE["image"][""];
+
+        // ADD FILE CHECKING HERE IF NEEDED
+
+        $sql = "INSERT INTO chocolates(name, price, description, amount, extension),
+                        VALUES (:name, :price, :description, :amount, :extension)";
+
+        $stmt = $pdo->prepare($sql);
+        $stmt->bindParam(":name", $name);
+        $stmt->bindParam(":price", $price);
+        $stmt->bindParam(":description", $description);
+        $stmt->bindParam(":amount", $amount);
+        $stmt->bindParam(":extension", $extension);
+
+        if ($stmt->execute()) {
+            $id = $db->lastInsertId();
+            $new_filepath = __DIR__ . "/../" . CHOCO_IMG_DIR . $id . $file_ext;
+
+            if (move_uploaded_file($_FILES["image"]["tmp_name"], $new_filepath)) {
+            } else {
+            }
+        } else {
+        }
+
+        $image = $_FILES["image"];
+    }
 ?>
 
 <!DOCTYPE html>

@@ -1,3 +1,10 @@
+<?php
+    $keyword = '';
+    if (isset($_GET['search'])){
+        $keyword = htmlspecialchars(trim($_GET['search']));
+    }
+?>
+
 <!DOCTYPE html>
 <html>
 
@@ -6,10 +13,14 @@
 </head>
 
 <body>
+    <script>
+        function send()
+        {document.searchbar.submit()}
+    </script>
     <header class="text-title">
         <div class="header-comp">
             <div class="header-menu" id="homeButton">
-                Home
+                <a href="/src/dashboard.php">Home</a>
             </div>
             <?php
             if (isset($_SESSION['isSuperuser'])) {
@@ -22,15 +33,14 @@
             ?>
         </div>
         <div class="header-comp header-search">
-            Search Bar
+            <form name="searchbar" action="/src/search_result.php" method="get">
+                <input class="search-bar" type="text" name="search" placeholder="Search" value="<?php echo $keyword ?>" onUnfocus="send()">
+            </form>
         </div>
         <div class="header-comp header-menu" id="logoutButton">
-            Logout
+            <a href="/src/utils/logout.php">Logout</a>
         </div>
     </header>
-    <script>
-
-    </script>
 
 </body>
 

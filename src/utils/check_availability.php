@@ -41,30 +41,39 @@
         else if (isset($_GET["email"])){
             $email = trim($_GET["email"]);
             if(!empty($email)){
-                $sql = "SELECT * FROM users WHERE email = :email";
-                $pdo = $connect_db();
-                $stmt = $pdo->prepare($sql);
-                $stmt->bindParam(":email", $email);
+                try{
+                    $sql = "SELECT * FROM users WHERE email = :email";
+                    $pdo = $connect_db();
+                    $stmt = $pdo->prepare($sql);
+                    $stmt->bindParam(":email", $email);
 
-                if($stmt->execute()){
-                    if($stmt->rowCount() === 1){
+                    if($stmt->execute()){
+                        if($stmt->rowCount() === 1){
+                            $return = array(
+                                'message' => "Email already taken!"
+                            );
+                            http_response_code(200);
+                        } else {
+                            $return = array(
+                                'message' => "Available"
+                            );
+                            http_response_code(200);
+                        }
+                    } 
+                    else {
                         $return = array(
-                            'message' => "Email already taken!"
+                            'message' => "Internal server error"
                         );
-                        http_response_code(200);
-                    } else {
-                        $return = array(
-                            'message' => "Available"
-                        );
-                        http_response_code(200);
+                        http_response_code(500);
                     }
                 } 
-                else {
+                catch (Exception $err){
                     $return = array(
                         'message' => "Internal server error"
                     );
                     http_response_code(500);
                 }
+                
             } 
             else {
                 $return = array(

@@ -7,10 +7,10 @@ function choco_card_long($choc)
     echo ('
     <div class="choco-card" id="choc-' . $id . '">
         <div class="card-image-box">
-            <img class="card-image" alt="' . $name . '" src="' . $image . '">
+            <a href="/src/detail_chocolate.php?id=' . $id .'"><img class="card-image" alt="' . $name . '" src="' . $image . '"></a>
         </div>
         <div class="card-desc">
-            <div class="card-title text-title">' . $name . '</div>
+            <a href="/src/detail_chocolate.php?id=' . $id .'"><div class="card-title text-title">' . $name . '</div></a>
             <div class="text-subtitle">Amount sold: ' . $sold . '</div>
             <div class="text-subtitle">Price: ' . $fprice .'</div>
             <div class="text-subtitle">Amount remaining: ' . $amount .'</div>

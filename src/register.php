@@ -1,5 +1,4 @@
 <?php
-
     ['connect_db' => $connect_db ] = require 'utils/db_connect.php';
 
     $error_message = "";
