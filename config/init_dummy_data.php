@@ -9,7 +9,6 @@ if($conn->connect_error){
     die("conn failed: " . $conn->connect_error);
 }
 
-$hash = password_hash('123', PASSWORD_BCRYPT);
 
 $dummies = [
         "INSERT INTO `chocolates` VALUES (1,'Dairy Milk',5,12000,'ntap','.jpg');",
@@ -24,7 +23,19 @@ $dummies = [
         "INSERT INTO `chocolates` VALUES (10,'Alpine',12,9000,'Ini agak mahal dikit dari dove tapi mayan lah','.jpg');",
         "INSERT INTO `chocolates` VALUES (11,'Aice',2,3000,'MURAH BANGET ENAK LAGI tapi rasa keringat dan darah','.jpg');",
         "INSERT INTO `chocolates` VALUES (12,'Chocolatos',5,1000,'Udah kayak tahu bulat harganya','.jpg');",
-        "INSERT INTO `users` VALUES ('admin', 'a@g.com', '$hash', 1);",
+        "INSERT INTO `users` VALUES ('admin', 'a@g.com', '" . password_hash('123', PASSWORD_BCRYPT) . "', 1);",
+        "INSERT INTO `users` VALUES ('spongebob', 'spongebob@gmail.com', '" . password_hash('kuning', PASSWORD_BCRYPT) ."', 0);",
+        "INSERT INTO `users` VALUES ('patrick', 'patrick@gmail.com', '" . password_hash('merahjambu', PASSWORD_BCRYPT) ."', 0);",
+        "INSERT INTO `transactions` VALUES ('spongebob', 1, 3, 36000, 'Bikini Bottom yang rumahnya bentuk nanas', '2020-07-23');",
+        "INSERT INTO `transactions` VALUES ('spongebob', 5, 1, 22000, 'Bikini Bottom yang rumahnya bentuk nanas', '2020-05-17');",
+        "INSERT INTO `transactions` VALUES ('spongebob', 3, 2, 20000, 'Bikini Bottom yang rumahnya bentuk nanas', '2020-02-21');",
+        "INSERT INTO `transactions` VALUES ('spongebob', 8, 5, 200000, 'Bikini Bottom yang rumahnya bentuk nanas', '2020-08-16');",
+        "INSERT INTO `transactions` VALUES ('spongebob', 11, 3, 9000, 'Bikini Bottom yang rumahnya bentuk nanas', '2020-06-18');",
+        "INSERT INTO `transactions` VALUES ('spongebob', 2, 2, 30000, 'Bikini Bottom yang rumahnya bentuk nanas', '2020-10-29');",
+        "INSERT INTO `transactions` VALUES ('patrick', 11, 9, 27000, 'Batu', '2020-12-23');",
+        "INSERT INTO `transactions` VALUES ('patrick', 3, 12, 120000, 'Batu', '2020-05-25');",
+        "INSERT INTO `transactions` VALUES ('patrick', 4, 15, 270000, 'Batu', '2020-07-21');",
+        "INSERT INTO `transactions` VALUES ('patrick', 12, 30, 30000, 'Batu', '2020-08-22');",
 ];
 foreach ($dummies as $sql) {
     if ($conn->query($sql)){

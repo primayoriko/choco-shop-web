@@ -51,7 +51,6 @@ $sql = "CREATE TABLE transactions (
             chocolate_id INT(6) UNSIGNED NOT NULL,
             amount INT(10) UNSIGNED NOT NULL,
             totalprice INT(18) UNSIGNED NOT NULL,
-            description TEXT,
             address TEXT NOT NULL,
             time DATETIME NOT NULL,
             PRIMARY KEY (username, chocolate_id, time),
