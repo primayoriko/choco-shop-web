@@ -40,6 +40,7 @@
     };
 
     $make_token = function($username, $password){
+        require_once __DIR__ . '/../../config/auth.config.php';
         ['connect_db' => $connect_db ] = require __DIR__ . '/db_connect.php';
 
         $curr_time = date("Y-m-d H:i:s");
@@ -59,9 +60,8 @@
             $stmt->execute();
             if($stmt->rowCount() === 1){
                 $user = $stmt->fetch(PDO::FETCH_OBJ);
-                // echo $password_hash;
                 if(password_verify($password, $user->password_hash)){
-                    $hash_id = password_hash($username . $curr_time, PASSWORD_BCRYPT);
+                    $hash_id = hash_hmac('sha256', $username . $curr_time, SECRET_KEY);
 
                     $sql = "INSERT INTO sessions (hash_id, username, is_superuser, login_time, expire_time)
                                 VALUES (:hash_id, :username, :is_superuser, :login_time, :expire_time)";
