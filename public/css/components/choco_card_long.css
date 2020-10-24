@@ -1,0 +1,32 @@
+.choco-card {
+  width: 80vw;
+  margin: 2rem 3rem;
+  border: solid 2px var(--primary);
+  border-radius: 2rem;
+  overflow: hidden;
+  display: flex;
+}
+
+
+.card-image-box {
+  position: relative;
+  height: 24rem;
+  box-sizing: border-box;
+}
+
+.card-image {
+  height: 100%;
+  max-width: 400px;
+  object-fit: contain;
+  display: block;
+  backface-visibility: hidden;
+}
+
+.card-desc {
+  padding: 2rem;
+  border-left: solid 2px var(--primary);
+}
+
+.card-title {
+  margin-bottom: 15px;
+}
