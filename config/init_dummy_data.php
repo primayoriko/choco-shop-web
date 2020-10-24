@@ -24,7 +24,6 @@ $dummies = [
         "INSERT INTO `chocolates` VALUES (10,'Alpine',12,9000,'Ini agak mahal dikit dari dove tapi mayan lah','.jpg');",
         "INSERT INTO `chocolates` VALUES (11,'Aice',2,3000,'MURAH BANGET ENAK LAGI tapi rasa keringat dan darah','.jpg');",
         "INSERT INTO `chocolates` VALUES (12,'Chocolatos',5,1000,'Udah kayak tahu bulat harganya','.jpg');",
-        "INSERT INTO `chocolates` VALUES (12,'Chocolatos',5,1000,'Udah kayak tahu bulat harganya','.jpg');",
         "INSERT INTO `users` VALUES ('admin', 'a@g.com', '$hash', 1);",
 ];
 foreach ($dummies as $sql) {
