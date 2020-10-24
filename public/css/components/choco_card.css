@@ -1,22 +1,28 @@
 .choco-card {
   width: 30rem;
   height: 36rem;
-  margin: 3rem;
+  margin: 2rem 3rem;
   border: solid 2px var(--primary);
+  border-radius: 2rem;
+  overflow: hidden;
 }
 
 .card-image-box {
   position: relative;
-  width: 30rem;
+  width: 100%;
   height: 24rem;
-  margin: 0.2rem;
   box-sizing: border-box;
 }
 
 .card-image {
-  width: 100%;
-  height: auto;
+  height: 100%;
+  object-fit: cover;
   display: block;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
   transition: 300ms ease;
   backface-visibility: hidden;
 }
@@ -31,12 +37,12 @@
   -ms-transform: translate(-50%, -50%);
 }
 
-.card-image-box:hover .image {
+.card-image-box:hover .card-image {
   opacity: 0.3;
 }
 
 .card-image-box:hover .hover {
-  opacity: 0.8;
+  opacity: 1;
 }
 
 .hover-text {
@@ -46,6 +52,12 @@
   color: white;
   font-weight: 600;
   cursor: pointer;
+  transition: 100ms ease;
+}
+
+.hover:hover .hover-text {
+  color: white;
+  font-size: 20px;
 }
 
 .card-desc {

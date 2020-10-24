@@ -32,9 +32,13 @@ include('components/choco_card.php');
                 <div class="top-content" id="buttonViewAll">View all chocolates</div>
             </div>
             <div class="menu-container">
-                <?php choco_card(['name' => 'Coklat asem', 'id' => 1, 'amount' => 10, 'price' => 1000, 'image' => '../resources/choco_placeholder.jpg', '']); ?>
-                <?php choco_card(['name' => 'Coklat asem', 'id' => 1, 'amount' => 10, 'price' => 1000, 'image' => '../resources/choco_placeholder.jpg', '']); ?>
-                <?php choco_card(['name' => 'Coklat asem', 'id' => 1, 'amount' => 10, 'price' => 1000, 'image' => '../resources/choco_placeholder.jpg', '']); ?>
+                <?php choco_card(['name' => 'Coklat asem', 'id' => 1, 'amount' => 10, 'price' => 1000, 'image' => '../resources/chocolate_img/1.jpg', '']); ?>
+                <?php choco_card(['name' => 'Coklat asem', 'id' => 1, 'amount' => 10, 'price' => 1000, 'image' => '../resources/chocolate_img/2.jpg', '']); ?>
+                <?php choco_card(['name' => 'Coklat asem', 'id' => 1, 'amount' => 10, 'price' => 1000, 'image' => '../resources/chocolate_img/3.jpg', '']); ?>
+                <?php choco_card(['name' => 'Coklat asem', 'id' => 1, 'amount' => 10, 'price' => 1000, 'image' => '../resources/chocolate_img/3.jpg', '']); ?>
+                <?php choco_card(['name' => 'Coklat asem', 'id' => 1, 'amount' => 10, 'price' => 1000, 'image' => '../resources/chocolate_img/3.jpg', '']); ?>
+                <?php choco_card(['name' => 'Coklat asem', 'id' => 1, 'amount' => 10, 'price' => 1000, 'image' => '../resources/chocolate_img/3.jpg', '']); ?>
+                <?php choco_card(['name' => 'Coklat asem', 'id' => 1, 'amount' => 10, 'price' => 1000, 'image' => '../resources/chocolate_img/3.jpg', '']); ?>
             </div>
         </div>
 

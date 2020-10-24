@@ -111,7 +111,8 @@ html {
   /* 1> Primary:*/
   --primary: rgb(198, 35, 73);
   --primary2: rgb(248, 76, 110);
-  --primary-light1: pink;
+  --primary-light1: rgb(233, 116, 143);
+  --primary-light2: pink;
 
   /*  1> Secondary: */
   /* --secondary1: #dd7e3e;

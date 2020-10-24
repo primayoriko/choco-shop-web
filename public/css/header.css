@@ -37,6 +37,6 @@ header {
 }
 
 .header-menu:hover {
-  background: rgb(233, 116, 143) 100%;
+  background: rgb(233, 116, 143);
   color: white;
 }
