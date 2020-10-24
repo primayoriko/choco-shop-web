@@ -2,7 +2,6 @@ header {
   height: 7rem;
   /* width: 100%; */
   position: relative;
-  padding: 2rem 3rem;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -33,5 +32,11 @@ header {
 }
 
 .header-menu {
-  padding: 0 2rem;
+  padding: 2rem 5rem;
+  transition: all 100ms ease-in-out;
+}
+
+.header-menu:hover {
+  background: rgb(233, 116, 143);
+  color: white;
 }
