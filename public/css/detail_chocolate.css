@@ -5,6 +5,7 @@
 }
 
 .chocolate-container {
+  position: relative;
   display: flex;
   margin-top: 20px;
 }
@@ -34,3 +35,9 @@
   margin: 0.5rem 0;
 }
 
+button {
+  position: absolute;
+  right: 10rem;
+  bottom: -5rem;
+  height: 5rem;
+}

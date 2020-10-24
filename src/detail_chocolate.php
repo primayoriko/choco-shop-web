@@ -42,6 +42,7 @@
                     <div class="text-subtitle">Description</div>
                     <p class="text-content"><?php echo $description ?></p>
                 </div>
+                <a href="/src/buy_chocolate.php?id=<?php echo $id ?>"><button class="btn-primary">Buy Now</button></a>
             </div>
         </div>
     </main>

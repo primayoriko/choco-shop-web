@@ -29,4 +29,9 @@
 
 .card-title {
   margin-bottom: 15px;
+  cursor: pointer;
+}
+
+.card-title:hover {
+  font-weight: 600;
 }
