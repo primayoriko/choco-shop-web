@@ -6,13 +6,15 @@ function choco_card($choc)
     $fprice = number_format($price, 2, ",", ".");
     echo ('
     <div class="choco-card" id="choc-' . $id . '">
-        <div class="card-image-box">
-            <img class="card-image" alt="' . $name . '" src="' . $image . '">
-            <div class="hover">
-                <a class="hover-text text-subtitle" href="#">Buy Now! 
-                </a>
-            </div> 
-        </div>
+        <a href="#">
+            <div class="card-image-box">
+                <img class="card-image" alt="' . $name . '" src="' . $image . '">
+                <div class="hover">
+                    <a class="hover-text text-subtitle" href="#">Buy Now! 
+                    </a>
+                </div> 
+            </div>
+        </a>
         <div class="card-desc">
             <a class="card-title text-title">' . $name . '</a>
             <div class="card-amount text-content">Amount sold: ' . $amount . ' </div>
