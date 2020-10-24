@@ -9,7 +9,7 @@ function choco_card($choc)
         <div class="card-image-box">
             <img class="card-image" alt="' . $name . '" src="' . $image . '">
             <div class="hover">
-                <a class="hover-text text-subtitle" href="#">Buy now! 
+                <a class="hover-text text-subtitle" href="#">Buy Now! 
                 </a>
             </div> 
         </div>

@@ -5,6 +5,7 @@
   border: solid 2px var(--primary);
   border-radius: 2rem;
   overflow: hidden;
+  justify-self: flex-end;
 }
 
 .card-image-box {
@@ -38,7 +39,7 @@
 }
 
 .card-image-box:hover .card-image {
-  opacity: 0.3;
+  opacity: 0.5;
 }
 
 .card-image-box:hover .hover {
@@ -76,4 +77,17 @@
 
 .card-amount {
   margin: 0.7rem 0 0 0;
+}
+
+@media only screen and (max-width: 1280px) {
+  .choco-card {
+    width: 27rem;
+    margin: 2rem 1.5rem;
+  }
+}
+
+@media only screen and (max-width: 800px) {
+  .choco-card {
+    margin: 2rem 1rem;
+  }
 }
