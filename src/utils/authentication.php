@@ -1,10 +1,11 @@
 <?php
-    ['connect_db' => $connect_db ] = require __DIR__ . '/db_connect.php';
 
     $validate_token = function($token){
+        ['connect_db' => $connect_db ] = require __DIR__ . '/db_connect.php';
+
         try{
             $pdo = $connect_db();
-            $sql = "SELECT * FROM SESSION WHERE hash_id = :hash_id";
+            $sql = "SELECT * FROM sessions WHERE hash_id = :hash_id";
 
             $stmt = $pdo->prepare($sql);
             $stmt->bindParam(':hash_id', $token);
@@ -12,7 +13,6 @@
             $stmt->execute();
             if($stmt->rowCount() === 1){
                 $session = $stmt->fetch(PDO::FETCH_OBJ);
-                
                 if(strtotime($session->expire_time) <= 
                     strtotime(date("Y-m-d H:i:s"))){
                     return array(
@@ -27,20 +27,21 @@
                     'username' => $session->username,
                     'is_superuser' => $session->is_superuser
                 );
-            } else {
+            } 
+            else {
                 return array(
                     'is_valid' => false,
                     'message' => 'token invalid',
                 );
             }
         } catch (Exception $error){
-            // $error_message = $error->getMessage();
             throw $error;
         }
     };
 
     $make_token = function($username, $password){
-        require(__DIR__ . "/db_connect.php");
+        ['connect_db' => $connect_db ] = require __DIR__ . '/db_connect.php';
+
         $curr_time = date("Y-m-d H:i:s");
         $expire_time = date('Y-m-d H:i:s', 
                 strtotime('+4 hour +20 minutes',strtotime($curr_time)));
@@ -48,6 +49,7 @@
         $username = trim($username);
         $password = trim($password);
         
+        $pdo = $connect_db();
         $sql = "SELECT * FROM users WHERE username = :username";
 
         $stmt = $pdo->prepare($sql);
@@ -59,9 +61,9 @@
                 $user = $stmt->fetch(PDO::FETCH_OBJ);
                 // echo $password_hash;
                 if(password_verify($password, $user->password_hash)){
-                    $hash_id = password_hash($username . $curr_time);
+                    $hash_id = password_hash($username . $curr_time, PASSWORD_BCRYPT);
 
-                    $sql = "INSERT INTO sessions (hash_id, username, is_superuser, login_time, expire_time),
+                    $sql = "INSERT INTO sessions (hash_id, username, is_superuser, login_time, expire_time)
                                 VALUES (:hash_id, :username, :is_superuser, :login_time, :expire_time)";
                     
                     $stmt = $pdo->prepare($sql);
@@ -79,7 +81,7 @@
                         'session_id' => $hash_id,
                         'username' => $username,
                         'is_superuser' => $user->is_superuser,
-                        'login_time' => $login_time,
+                        'login_time' => $curr_time,
                         'expire_time'=> $expire_time
                     );
 
@@ -105,7 +107,8 @@
     };
 
     $destroy_token = function($hash_id){
-
+        ['connect_db' => $connect_db ] = require __DIR__ . '/db_connect.php';
+        
     };
 
     return compact('validate_token', 'make_token', 'destroy_token');

@@ -13,9 +13,9 @@ $connect_db = function(){
                             PDO::ERRMODE_EXCEPTION);
         
         return $pdo;
-    } catch (PDOException $e){
+    } catch (PDOException $error){
         // die("ERROR: can't connect to database" . $e->getMessage());
-        throw $e;
+        throw $error;
     }
 };
 
