@@ -36,7 +36,7 @@ $sql = "CREATE TABLE chocolates (
             amount INT(10) UNSIGNED NOT NULL,
             price INT(12) UNSIGNED NOT NULL,
             description TEXT,
-            extension VARCHAR(10)
+            image_extension VARCHAR(10)
         )";
 
 if ($conn->query($sql) === TRUE){
@@ -73,6 +73,7 @@ $sql = "CREATE TABLE sessions (
     username VARCHAR(50) NOT NULL,
     is_superuser BOOLEAN NOT NULL,
     login_time DATETIME NOT NULL,
+    expire_time DATETIME NOT NULL,
     PRIMARY KEY (hash_id),
     -- FOREIGN KEY (username, is_superuser) REFERENCES users(username, is_superuser)
     FOREIGN KEY (username) REFERENCES users(username)
@@ -85,6 +86,25 @@ if ($conn->query($sql) === TRUE){
     echo "sessions table successfully created\n";
 } else {
     echo "ERROR create table sessions\n";
+}
+
+$sql = "SET GLOBAL event_scheduler = ON";
+
+if ($conn->query($sql) === TRUE){
+    echo "set event scheduling options successfully\n";
+} else {
+    echo "ERROR set event scheduling options\n";
+}
+
+$sql = "CREATE EVENT cleanup
+        ON SCHEDULE EVERY 2 MINUTE
+        DO DELETE FROM sessions
+        WHERE expire_time < CURRENT_TIMESTAMP()";
+
+if ($conn->query($sql) === TRUE){
+    echo "cleanup sessions event successfully created\n";
+} else {
+    echo "ERROR create cleanup sessions event\n";
 }
 
 $conn->close();

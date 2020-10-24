@@ -1,12 +1,15 @@
 <?php
-    ['is_valid_token' => $is_valid_token ] = require 'utils/authentication.php';
+    ['validate_token' => $validate_token ] = require 'utils/authentication.php';
     ['make_token' => $make_token ] = require 'utils/authentication.php';
     ['connect_db' => $connect_db ] = require 'utils/db_connect.php';
 
-    if(isset($_COOKIE["loginSession"]) &&  
-        $is_valid_token($_COOKIE["loginSession"])){
-        header("location: dashboard.php");
-        exit;
+    $session = array();
+    if(isset($_COOKIE["sessionID"])){
+        $session = $validate_token($_COOKIE["sessionID"]);
+        if($session->is_valid){
+            header("location: dashboard.php");
+            exit;
+        }
     }
 
     $error_message = "";
@@ -16,10 +19,16 @@
         $password = trim($_POST["password"]);
         try{
             $token = $make_token($username, $password);
+            if($token->is_success){
+                setcookie('sessionID', $token->session_id, 3600 * 5);
+                header("location: dashboard.php");
+                exit;
+            } else {
+                $error_message = $token->message;
+            }
         } catch (Exception $error){
             $error_message = $error->getMessage();
         }
-
     }
     
 ?>
