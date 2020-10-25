@@ -47,3 +47,9 @@ button {
   bottom: -5rem;
   height: 5rem;
 }
+
+.not-found {
+  padding-top: 2rem;
+  align-self: center;
+  text-align: center;
+}
