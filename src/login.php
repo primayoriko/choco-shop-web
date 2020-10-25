@@ -72,7 +72,7 @@
                 <input class="text-input" id="emailField" name="email" type="email">
                 <div class="text-content label">Password</div>
                 <input class="text-input" type="password" id="passwordField" name="password">
-                <span id="login-info"></span>
+                <span id="login-error"></span>
                 <button class="btn-primary" type="submit" form="login">Login</button>
             </form>
         </div>
