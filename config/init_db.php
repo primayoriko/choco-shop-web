@@ -96,7 +96,7 @@ if ($conn->query($sql) === TRUE){
 }
 
 $sql = "CREATE EVENT cleanup
-        ON SCHEDULE EVERY 2 MINUTE
+        ON SCHEDULE EVERY 5 MINUTE
         DO DELETE FROM sessions
         WHERE expire_time < CURRENT_TIMESTAMP()";
 

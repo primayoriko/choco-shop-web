@@ -21,9 +21,9 @@ if (isset($_GET['search'])) {
     </script>
     <header class="text-title">
         <div class="header-comp">
-            <div class="header-menu" id="homeButton">
-                <a href="/src/dashboard.php">Home</a>
-            </div>
+            <a class="header-menu" id="homeButton" href="/src/dashboard.php">
+                Home
+            </a>
             <?php
 
             if ($session['is_superuser']) {
@@ -37,7 +37,7 @@ if (isset($_GET['search'])) {
                 <a href="/src/transaction_history.php">
                 History
                 </a>
-         </div>';
+                </div>';
             }
             ?>
         </div>
@@ -46,9 +46,9 @@ if (isset($_GET['search'])) {
                 <input class="search-bar" type="text" name="search" placeholder="Search" value="<?php echo $keyword ?>" onUnfocus="send()">
             </form>
         </div>
-        <div class="header-comp header-menu" id="logoutButton">
-            <a href="/src/utils/logout.php">Logout</a>
-        </div>
+        <a class="header-comp header-menu" id="logoutButton" href="/src/utils/logout.php">
+            Logout
+        </a>
     </header>
 
 </body>

@@ -3,7 +3,14 @@
 
     if(isset($_COOKIE['sessionID'])){
         $destroy_token($_COOKIE['sessionID']);
-        setcookie('sessionID', '', time() - 3600);
+        setcookie('sessionID', time() - 3600, [
+            'expires' => time() -3600,
+            'path' => '/',
+            'domain' => 'localhost',
+            'secure' => true,
+            'httponly' => true,
+            'samesite' => 'None',
+        ]);
     }
 
     header("location: ../login.php");

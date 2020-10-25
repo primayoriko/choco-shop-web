@@ -1,4 +1,4 @@
-@import './index.css';
+@import "./index.css";
 
 .page-title {
   display: flex;
@@ -10,16 +10,23 @@
 .choco-container {
   display: flex;
   flex-direction: row;
-
 }
 
-.choco-image {
-  border: solid 2px brown;
-  border-radius: 1rem;
-  width: 200px;
-  height: 300px;
-  padding: 1rem;
-  margin: 0 2rem 0 0;
+.image-box {
+  position: relative;
+  height: 24rem;
+  box-sizing: border-box;
+  border: solid 2px var(--primary);
+  border-radius: 2rem;
+}
+
+.image {
+  height: 100%;
+  max-width: 400px;
+  border-radius: 2rem;
+  object-fit: cover;
+  display: block;
+  backface-visibility: hidden;
 }
 
 .choco-right {
@@ -27,6 +34,7 @@
   flex-direction: column;
   flex-grow: 1;
   justify-content: space-between;
+  padding: 0 2rem;
 }
 
 .choco-props > * {
@@ -43,7 +51,7 @@
 
 .amount-modifier {
   display: flex;
-  flex-direction: column; 
+  flex-direction: column;
 }
 
 .btn-group {
