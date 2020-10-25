@@ -64,7 +64,7 @@
                     echo '<div> Nothing to show </div>';
                 }
                 else{
-                    echo '<table style=""> ';
+                    echo '<table> ';
                     echo "<tr>
                             <th>
                                 Chocolate Name:
@@ -77,9 +77,6 @@
                             </th>
                             <th>
                                 Date:
-                            </th>
-                            <th>
-                                Chocolate Name:
                             </th>
                             <th>
                                 Time:
