@@ -4,7 +4,6 @@ function choco_card($choc)
 {
     extract($choc);
     $hover_text = "Buy Now!";
-    echo $is_superuser;
     if ($is_superuser) {
         $hover_text = "Add Stock";
     }

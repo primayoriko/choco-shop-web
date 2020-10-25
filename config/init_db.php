@@ -70,11 +70,12 @@ if ($conn->query($sql) === TRUE){
 $sql = "CREATE TABLE sessions ( 
     hash_id VARCHAR(65) NOT NULL,
     username VARCHAR(50) NOT NULL,
+    email VARCHAR(100) NOT NULL,
     is_superuser BOOLEAN NOT NULL,
     login_time DATETIME NOT NULL,
     expire_time DATETIME NOT NULL,
     PRIMARY KEY (hash_id),
-    -- FOREIGN KEY (username, is_superuser) REFERENCES users(username, is_superuser)
+    FOREIGN KEY (email) REFERENCES users(email),
     FOREIGN KEY (username) REFERENCES users(username)
 )";
 
