@@ -127,3 +127,20 @@ input[type="number"] {
 .btn-group > button {
   margin: 0 1rem;
 }
+
+.address-block {
+  display: flex;
+  flex-direction: column;
+}
+
+.address-input {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  outline: none;
+  overflow: hidden;
+  resize: none;
+  border-radius: 1rem;
+  padding: 5px;
+  outline: none;
+  width: 30vw;
+  margin: 10px 0;
+}
