@@ -14,7 +14,7 @@ $transactions = $db->query($sql)->fetchAll();
 // $ Insert sold amount and image to array
 for ($i = 0; $i <  count($menu_list); $i++) {
     $menu_list[$i]['sold'] = getSold($menu_list[$i]['id'], $transactions);
-    $menu_list[$i]['image'] = $asset_dir . $menu_list[$i]['id'] . $menu_list[$i]['extension'];
+    $menu_list[$i]['image'] = $asset_dir . $menu_list[$i]['id'] . $menu_list[$i]['image_extension'];
 }
 
 // $ Sort array on amount of sold chocolate

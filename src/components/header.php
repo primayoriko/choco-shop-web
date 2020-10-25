@@ -1,8 +1,9 @@
 <?php
-    $keyword = '';
-    if (isset($_GET['search'])){
-        $keyword = htmlspecialchars(trim($_GET['search']));
-    }
+$keyword = '';
+if (isset($_GET['search'])) {
+    $keyword = htmlspecialchars(trim($_GET['search']));
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -14,8 +15,9 @@
 
 <body>
     <script>
-        function send()
-        {document.searchbar.submit()}
+        function send() {
+            document.searchbar.submit()
+        }
     </script>
     <header class="text-title">
         <div class="header-comp">
@@ -23,12 +25,19 @@
                 <a href="/src/dashboard.php">Home</a>
             </div>
             <?php
-            if (isset($_SESSION['isSuperuser'])) {
-                if ($_SESSION["isSuperuser"]) {
-                    echo '<div class="header-menu"> Add New Chocolate </div>';
-                } else {
-                    echo '<div class="header-menu"> History </div>';
-                }
+
+            if ($session['is_superuser']) {
+                echo '<div class="header-menu">
+                        <a href="/src/new_chocolate.php">
+                        Add New Chocolate
+                        </a>
+                 </div>';
+            } else if (!$session['is_superuser']) {
+                echo '<div class="header-menu">
+                <a href="/src/transaction_history.php">
+                History
+                </a>
+         </div>';
             }
             ?>
         </div>

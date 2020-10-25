@@ -19,13 +19,12 @@
 
 <head>
     <title>Willy Wangky Chocolate Factory</title>
-    <link rel="stylesheet" href="../public/css/index.css" type="text/css">
     <link rel="stylesheet" href="../public/css/buy_add_chocolate.css" type="text/css">
 </head>
 
 <body>
     <main>
-    <?php include('components/header.php') ?>
+        <?php include('components/header.php') ?>
         <div class="container">
             <div class="page-title text-title">
                 Buy Chocolate
@@ -36,7 +35,7 @@
                 </div>
                 <div class="choco-right">
 
-                <div class="choco-props text-content">
+                    <div class="choco-props text-content">
                         <div class="choco-title text-title" id="choco-title">Choco Name 1</div>
                         <div>Amount sold: <span id="choco-sold"> 6 </span></div>
                         <div>Price: <span id="choco-price"> Rp. 3.000,00 </span></div>
@@ -62,15 +61,15 @@
                 <div> Address: </div>
                 <div class="address-input"> Textbox </div>
             </div>
-                <div class="btn-group ">
-                    <button class="btn-secondary text-subtitle"> Cancel </button>
-                    <button class="btn-primary text-subtitle" id="btn-buy">Buy</button>
-                </div>
+            <div class="btn-group ">
+                <button class="btn-secondary text-subtitle"> Cancel </button>
+                <button class="btn-primary text-subtitle" id="btn-buy">Buy</button>
             </div>
+        </div>
 
-            <script>
+        <script>
 
-            </script>
+        </script>
     </main>
 </body>
 
