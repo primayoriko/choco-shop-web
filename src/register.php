@@ -47,6 +47,8 @@
 
                 if($stmt->execute()){
                     $success_message .= "User has been created successfully.\n";
+                    header("location: dashboard.php");
+                    exit;
                 } 
                 else {
                     // 
@@ -86,194 +88,139 @@
 
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>Register</title>
-        <link rel="stylesheet" href="../public/css/register.css" type="text/css">  
-    </head>
-    <body>
-        <div class="spacer"></div>
-        <header>
-            Willy Wangky Choco Factory
-        </header>
-        <div class="spacer"></div>
-        <div class="successMessage">
-            <?php echo $success_message ?>
-        </div>
-        <div class="errorMessage">
-            <?php echo $error_message ?>
-        </div>
-        <main>
-            Register
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+    <link rel="stylesheet" href="../public/css/logreg.css" type="text/css">  
+</head>
+<body>
+    <main>
+        <div class="container">
+            <div class="text-title large-title">
+                Willy Wangky Choco Factory
+            </div>
             <form id="register" action="register.php" method="POST" onsubmit="register()">
-                <table>
-                    <tr>
-                        <th>Username</th>
-                    </tr>
-                    <tr>
-                        <td>
-                            <input id="usernameField" name="username" oninput="checkUsername()">
-                        </td>
-                    </tr>
-                    <tr id="usernameErrorRow" style="display: none">
-                        <td>
-                            <p id="usernameError"> </p>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>Email</th>
-                    </tr>
-                    <tr>
-                        <td> 
-                            <input type="email" id="emailField" name="email" oninput="checkEmail()">
-                        </td>
-                    </tr>
-                    <tr id="emailErrorRow" style="display: none">
-                        <td>
-                            <p id="emailError"> </p>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>Password</th>
-                    </tr>
-                    <tr>
-                        <td>
-                            <input type="password" id="passwordField" name="password" oninput="checkPassword()" >
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>Confirm Password</th>
-                    </tr>
-                    <tr>
-                        <td>
-                            <input type="password" id="confirmPasswordField" name="confirmPassword" oninput="checkPassword()">
-                        </td>
-                    </tr>
-                    <tr id="passwordErrorRow" style="display: none">
-                        <td>
-                            <p id="passwordError"> </p>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>
-                            <button type="submit" form="register" value="Submit" onclick="return register()" >
-                                Register!
-                            </button>
-                        </th>
-                    </tr>
-                </table>
+                <div class="text-content label">Username</div>
+                <input class="text-input" id="usernameField" name="username" oninput="checkUsername()">
+                <div class="text-content error" id="usernameError"></div>
+                <div class="text-content label">Email</div>
+                <input class="text-input" id="emailField" name="email" type="email" oninput="checkEmail()">
+                <div class="text-content error" id="emailError"></div>
+                <div class="text-content label">Password</div>
+                <input class="text-input" id="passwordField" name="password" type="password" oninput="checkPassword()">
+                <div class="text-content label">Confirm Password</div>
+                <input class="text-input" id="confirmPasswordField" name="confirmPassword" type="password" oninput="checkPassword()">
+                <div class="text-content error" id="passwordError"></div>
+                <a href="/src/login.php"><button class="btn-secondary" type="button">Back to Login</button></a>
+                <button class="btn-primary btn-submit" type="submit" form="register" value="Submit" onclick="return register()">Register!</button>
             </form>
-        </main>
-        <div class="spacer"></div>
-        <script>
-            function checkUsername(){
-                var usernameCheck;
-                const username = document. getElementById("usernameField").value;
+        </div>
+    </main>
+    <script>
+        function checkUsername(){
+            var usernameCheck;
+            const username = document. getElementById("usernameField").value;
 
-                if(window.XMLHttpRequest){
-                    usernameCheck = new XMLHttpRequest();
-                } else {
-                    usernameCheck = new ActiveXObject("Microsoft.XMLHTTP");
-                }
-
-                usernameCheck.onreadystatechange = function() {
-                    if(this.readyState === 4){
-                        var responseBody = JSON.parse(this.responseText);
-                        if (this.status == 200 && responseBody.message === "Available") {
-                            document.getElementById("usernameField").style.borderColor = "green";
-                            document.getElementById("usernameField").style.borderWidth = "3px";
-                            document.getElementById("usernameErrorRow").style.display = "none";
-                            document.getElementById("usernameError").innerHTML = " ";
-                        } else {
-                            document. getElementById("usernameField").style.borderColor = "red";
-                            document.getElementById("usernameField").style.borderWidth = "3px";
-                            document.getElementById("usernameErrorRow").style.display = "block";
-                            document.getElementById("usernameError").innerHTML = responseBody.message;
-                        }
-                    }
-                };
-
-                usernameCheck.open("GET", `utils/check_availability.php?username=${username}`, true);
-                usernameCheck.send();
-            }
-            
-            function checkEmail(){
-                var emailCheck;
-                const email = document.getElementById("emailField").value;
-
-                if(window.XMLHttpRequest){
-                    emailCheck = new XMLHttpRequest();
-                } else {
-                    emailCheck = new ActiveXObject("Microsoft.XMLHTTP");
-                }
-
-                emailCheck.onreadystatechange = function() {
-                    if(this.readyState === 4){
-                        var responseBody = JSON.parse(this.responseText);
-                        if (this.status == 200 && responseBody.message === "Available") {
-                            document.getElementById("emailField").style.borderColor = "green";
-                            document.getElementById("emailField").style.borderWidth = "3px";
-                            document.getElementById("emailErrorRow").style.display = "none";
-                            document.getElementById("emailError").innerHTML = " ";
-                        } else {
-                            document. getElementById("emailField").style.borderColor = "red";
-                            document.getElementById("emailField").style.borderWidth = "3px";
-                            document.getElementById("emailErrorRow").style.display = "block";
-                            document.getElementById("emailError").innerHTML = responseBody.message;
-                        }
-                    }
-                };
-
-                emailCheck.open("GET", `utils/check_availability.php?email=${email}`, true);
-                emailCheck.send();
+            if(window.XMLHttpRequest){
+                usernameCheck = new XMLHttpRequest();
+            } else {
+                usernameCheck = new ActiveXObject("Microsoft.XMLHTTP");
             }
 
-            function checkPassword(){
-                var password = document.getElementById("passwordField").value;
-                var confirmPassword = document.getElementById("confirmPasswordField").value;
+            usernameCheck.onreadystatechange = function() {
+                if(this.readyState === 4){
+                    var responseBody = JSON.parse(this.responseText);
+                    if (this.status == 200 && responseBody.message === "Available") {
+                        document.getElementById("usernameField").style.borderColor = "green";
+                        document.getElementById("usernameField").style.borderWidth = "3px";
+                        document.getElementById("usernameError").innerHTML = "";
+                    } else {
+                        document. getElementById("usernameField").style.borderColor = "red";
+                        document.getElementById("usernameField").style.borderWidth = "3px";
+                        document.getElementById("usernameError").innerHTML = responseBody.message;
+                    }
+                }
+            };
 
-                if(password === confirmPassword){
-                    document.getElementById("passwordField").style.borderColor = "green";
-                    document.getElementById("passwordField").style.borderWidth = "3px";
-                    document.getElementById("confirmPasswordField").style.borderColor = "green";
-                    document.getElementById("confirmPasswordField").style.borderWidth = "3px";
-                    document.getElementById("passwordErrorRow").style.display = "none";
-                    document.getElementById("passwordError").innerHTML = " ";
-                }
-                else{
-                    document. getElementById("passwordField").style.borderColor = "red";
-                    document.getElementById("passwordField").style.borderWidth = "3px";
-                    document. getElementById("confirmPasswordField").style.borderColor = "red";
-                    document.getElementById("confirmPasswordField").style.borderWidth = "3px";
-                    document.getElementById("passwordErrorRow").style.display = "block";
-                    document.getElementById("passwordError").innerHTML = "Password and confirm password not same!";
-                }
+            usernameCheck.open("GET", `utils/check_availability.php?username=${username}`, true);
+            usernameCheck.send();
+        }
+        
+        function checkEmail(){
+            var emailCheck;
+            const email = document.getElementById("emailField").value;
+
+            if(window.XMLHttpRequest){
+                emailCheck = new XMLHttpRequest();
+            } else {
+                emailCheck = new ActiveXObject("Microsoft.XMLHTTP");
             }
 
-            function register(){
-                var emailError = document.getElementById("emailError").innerHTML;
-                var usernameError = document.getElementById("usernameError").innerHTML;
-                var passwordError = document.getElementById("passwordError").innerHTML;
-                if(usernameError !== " " || emailError !== " " || passwordError !== " "){
-                    var error = "";
-                    // console.log(usernameError.innerHTML === " ");
-                    // console.log(typeof usernameError.innerHTML);
-                    if(usernameError !== " "){
-                        error += (usernameError + "\n");
+            emailCheck.onreadystatechange = function() {
+                if(this.readyState === 4){
+                    var responseBody = JSON.parse(this.responseText);
+                    if (this.status == 200 && responseBody.message === "Available") {
+                        document.getElementById("emailField").style.borderColor = "green";
+                        document.getElementById("emailField").style.borderWidth = "3px";
+                        document.getElementById("emailError").innerHTML = "";
+                    } else {
+                        document. getElementById("emailField").style.borderColor = "red";
+                        document.getElementById("emailField").style.borderWidth = "3px";
+                        document.getElementById("emailError").innerHTML = responseBody.message;
                     }
-                    if(emailError !== " "){
-                        error += (emailError + "\n");
-                    }
-                    if(passwordError !== " "){
-                        error += (passwordError + "\n");
-                    }
-                    alert("ERROR!\n" + error);
-                    return false;
                 }
-                else{
-                    document.getElementById("register").submit();
-                    return true;
-                }
+            };
+
+            emailCheck.open("GET", `utils/check_availability.php?email=${email}`, true);
+            emailCheck.send();
+        }
+
+        function checkPassword(){
+            var password = document.getElementById("passwordField").value;
+            var confirmPassword = document.getElementById("confirmPasswordField").value;
+
+            if(password === confirmPassword){
+                document.getElementById("passwordField").style.borderColor = "green";
+                document.getElementById("passwordField").style.borderWidth = "3px";
+                document.getElementById("confirmPasswordField").style.borderColor = "green";
+                document.getElementById("confirmPasswordField").style.borderWidth = "3px";
+                document.getElementById("passwordError").innerHTML = "";
             }
-        </script>
-    </body>
+            else{
+                document. getElementById("passwordField").style.borderColor = "red";
+                document.getElementById("passwordField").style.borderWidth = "3px";
+                document. getElementById("confirmPasswordField").style.borderColor = "red";
+                document.getElementById("confirmPasswordField").style.borderWidth = "3px";
+                document.getElementById("passwordError").innerHTML = "Password and confirm password not same!";
+            }
+        }
+
+        function register(){
+            var emailError = document.getElementById("emailError").innerHTML;
+            var usernameError = document.getElementById("usernameError").innerHTML;
+            var passwordError = document.getElementById("passwordError").innerHTML;
+            if(usernameError !== "" || emailError !== "" || passwordError !== ""){
+                var error = "";
+                // console.log(usernameError.innerHTML === " ");
+                // console.log(typeof usernameError.innerHTML);
+                if(usernameError !== ""){
+                    error += (usernameError + "\n");
+                }
+                if(emailError !== ""){
+                    error += (emailError + "\n");
+                }
+                if(passwordError !== ""){
+                    error += (passwordError + "\n");
+                }
+                alert("ERROR!\n" + error);
+                return false;
+            }
+            else{
+                document.getElementById("register").submit();
+                return true;
+            }
+        }
+    </script>
+</body>
 </html>

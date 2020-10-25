@@ -67,11 +67,12 @@
             </div>
             <form id="login" action="login.php" method="POST">
                 <div class="text-content label">Email</div>
-                <input class="text-input" id="emailField" name="email" type="email">
+                <input class="text-input<?php $error_message=='' ? '' : ' border-error'?>" id="emailField" name="email" type="email">
                 <div class="text-content label">Password</div>
-                <input class="text-input" id="passwordField" name="password" type="password">
-                <div class="text-content login-error"><?php echo $error_message ?></div>
-                <button class="btn-primary" type="submit" form="login">Login</button>
+                <input class="text-input<?php $error_message=='' ? '' : ' border-error'?>" id="passwordField" name="password" type="password">
+                <div class="text-content error"><?php echo $error_message ?></div>
+                <a href="/src/register.php"><button class="btn-secondary" type="button">Sign up</button></a>
+                <button class="btn-primary btn-submit" type="submit" form="login">Login</button>
             </form>
         </div>
     </main>
