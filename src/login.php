@@ -17,7 +17,6 @@
         }
         catch(Exception $error){
             $error_message = $error->getMessage();
-            echo $error_message;
         }
     }
 
@@ -45,7 +44,6 @@
         } 
         catch (Exception $error){
             $error_message = $error->getMessage();
-            echo $error_message;
         }
     }
     
@@ -71,8 +69,8 @@
                 <div class="text-content label">Email</div>
                 <input class="text-input" id="emailField" name="email" type="email">
                 <div class="text-content label">Password</div>
-                <input class="text-input" type="password" id="passwordField" name="password">
-                <span id="login-error"></span>
+                <input class="text-input" id="passwordField" name="password" type="password">
+                <div class="text-content login-error"><?php echo $error_message ?></div>
                 <button class="btn-primary" type="submit" form="login">Login</button>
             </form>
         </div>
