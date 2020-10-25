@@ -33,10 +33,14 @@ if (isset($_GET['id']) && filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT)) {
     $sql = "SELECT * FROM transactions WHERE chocolate_id=$id";
     $transactions = $db->query($sql)->fetchAll();
 
-    $chocolate['image'] = $asset_dir . $chocolate['id'] . $chocolate['image_extension'];
-    $chocolate['sold'] = getSold($chocolate['id'], $transactions);
-    $fprice = number_format($chocolate['price'], 2, ",", ".");
-    extract($chocolate);
+    if (empty($chocolate)) {
+        $isIdExist = false;
+    }else{
+        $chocolate['image'] = $asset_dir . $chocolate['id'] . $chocolate['image_extension'];
+        $chocolate['sold'] = getSold($chocolate['id'], $transactions);
+        $fprice = number_format($chocolate['price'], 2, ",", ".");
+        extract($chocolate);
+    }
 } else {
     $isIdExist = false;
 }
@@ -71,7 +75,7 @@ if (isset($_GET['id']) && filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT)) {
                 <a href="<?php echo $mode['link'] . $id ?>"><button class="btn-primary text-subtitle"><?php echo $mode['name'] ?></button></a>
             </div>
             <?php } else { ?>
-                <div>ERROR</div>
+                <div class="text-subtitle not-found">Coklat tidak dapat ditemukan :(</div>
             <?php } ?>
         </div>
     </main>
