@@ -179,46 +179,87 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             var password = document.getElementById("passwordField").value;
             var confirmPassword = document.getElementById("confirmPasswordField").value;
 
+            <<
+            << << < HEAD
             if (password === confirmPassword) {
-                document.getElementById("passwordField").style.borderColor = "green";
-                document.getElementById("passwordField").style.borderWidth = "3px";
-                document.getElementById("confirmPasswordField").style.borderColor = "green";
-                document.getElementById("confirmPasswordField").style.borderWidth = "3px";
-                document.getElementById("passwordError").innerHTML = "";
-            } else {
-                document.getElementById("passwordField").style.borderColor = "red";
-                document.getElementById("passwordField").style.borderWidth = "3px";
-                document.getElementById("confirmPasswordField").style.borderColor = "red";
-                document.getElementById("confirmPasswordField").style.borderWidth = "3px";
-                document.getElementById("passwordError").innerHTML = "Password and confirm password not same!";
+                ===
+                === =
+                if (password === confirmPassword) {
+                    >>>
+                    >>> > 7298e886873 ae7169042e8bd1a3ff302ef2a0b82
+                    document.getElementById("passwordField").style.borderColor = "green";
+                    document.getElementById("passwordField").style.borderWidth = "3px";
+                    document.getElementById("confirmPasswordField").style.borderColor = "green";
+                    document.getElementById("confirmPasswordField").style.borderWidth = "3px";
+                    document.getElementById("passwordError").innerHTML = ""; <<
+                    << << < HEAD
+                } else {
+                    document.getElementById("passwordField").style.borderColor = "red";
+                    document.getElementById("passwordField").style.borderWidth = "3px";
+                    document.getElementById("confirmPasswordField").style.borderColor = "red"; ===
+                    === =
+                } else {
+                    document.getElementById("passwordField").style.borderColor = "red";
+                    document.getElementById("passwordField").style.borderWidth = "3px";
+                    document.getElementById("confirmPasswordField").style.borderColor = "red"; >>>
+                    >>> > 7298e886873 ae7169042e8bd1a3ff302ef2a0b82
+                    document.getElementById("confirmPasswordField").style.borderWidth = "3px";
+                    document.getElementById("passwordError").innerHTML = "Password and confirm password not same!";
+                }
             }
-        }
 
-        function register() {
-            var emailError = document.getElementById("emailError").innerHTML;
-            var usernameError = document.getElementById("usernameError").innerHTML;
-            var passwordError = document.getElementById("passwordError").innerHTML;
-            if (usernameError !== "" || emailError !== "" || passwordError !== "") {
-                var error = "";
-                // console.log(usernameError.innerHTML === " ");
-                // console.log(typeof usernameError.innerHTML);
-                if (usernameError !== "") {
-                    error += (usernameError + "\n");
-                }
-                if (emailError !== "") {
-                    error += (emailError + "\n");
-                }
-                if (passwordError !== "") {
-                    error += (passwordError + "\n");
-                }
-                alert("ERROR!\n" + error);
-                return false;
-            } else {
-                document.getElementById("register").submit();
-                return true;
-            }
-        }
+            <<
+            << << < HEAD
+
+            function register() {
+                var emailError = document.getElementById("emailError").innerHTML;
+                var usernameError = document.getElementById("usernameError").innerHTML;
+                var passwordError = document.getElementById("passwordError").innerHTML;
+                if (usernameError !== "" || emailError !== "" || passwordError !== "") {
+                    var error = "";
+                    // console.log(usernameError.innerHTML === " ");
+                    // console.log(typeof usernameError.innerHTML);
+                    if (usernameError !== "") {
+                        error += (usernameError + "\n");
+                    }
+                    if (emailError !== "") {
+                        error += (emailError + "\n");
+                    }
+                    if (passwordError !== "") {
+                        ===
+                        === =
+                        function register() {
+                            var emailError = document.getElementById("emailError").innerHTML;
+                            var usernameError = document.getElementById("usernameError").innerHTML;
+                            var passwordError = document.getElementById("passwordError").innerHTML;
+                            if (usernameError !== "" || emailError !== "" || passwordError !== "") {
+                                var error = "";
+                                // console.log(usernameError.innerHTML === " ");
+                                // console.log(typeof usernameError.innerHTML);
+                                if (usernameError !== "") {
+                                    error += (usernameError + "\n");
+                                }
+                                if (emailError !== "") {
+                                    error += (emailError + "\n");
+                                }
+                                if (passwordError !== "") {
+                                    >>>
+                                    >>> > 7298e886873 ae7169042e8bd1a3ff302ef2a0b82
+                                    error += (passwordError + "\n");
+                                }
+                                alert("ERROR!\n" + error);
+                                return false; <<
+                                << << < HEAD
+                            } else {
+                                ===
+                                === =
+                            } else {
+                                >>>
+                                >>> > 7298e886873 ae7169042e8bd1a3ff302ef2a0b82
+                                document.getElementById("register").submit();
+                                return true;
+                            }
+                        }
     </script>
 </body>
-
-</html>
+<<<<<<< HEAD </html>=======</html>>>>>>>> 7298e886873ae7169042e8bd1a3ff302ef2a0b82
