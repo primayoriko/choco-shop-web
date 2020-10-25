@@ -22,18 +22,18 @@
         }
 
         // Need checking superuser??
-        else if(!$session['is_superuser']){
+        else if($session['is_superuser']){
             echo 'asdsadsa';
             header("location: dashboard.php");
             exit;
         }
 
-        $sql = "SELECT * FROM transactions WHERE username = :email";
-        // $sql = "SELECT * FROM transactions WHERE email = :email";
+        $sql = "SELECT t.chocolate_id, c.name, t.amount, t.totalprice, t.time, t.address 
+                FROM TRANSACTIONS as t LEFT JOIN CHOCOLATES as c 
+                ON t.chocolate_id = c.id where t.username = :username";
         $pdo = $connect_db();
         $stmt = $pdo->prepare($sql);
-        // $stmt->bindParam(':email', $session->email);
-        $stmt->bindParam(':email', $session->username);
+        $stmt->bindParam(':username', $session['username']);
 
         $stmt->execute();
 
@@ -50,7 +50,7 @@
 <html>
     <head>
         <title>Register</title>
-        <link rel="stylesheet" href="public/css/new_chocolate.css" type="text/css">
+        <link rel="stylesheet" href="../public/css/register.css" type="text/css">
     </head>
     <body>
         <div class="spacer"></div>
@@ -64,7 +64,7 @@
                     echo '<div> Nothing to show </div>';
                 }
                 else{
-                    echo '<table> ';
+                    echo '<table style=""> ';
                     echo "<tr>
                             <th>
                                 Chocolate Name:
@@ -92,7 +92,9 @@
                         $datetime = explode(" ",$transaction->time);
                         echo "<tr>
                                 <th>
-                                    <a href=''>$transaction->name</a>
+                                    <a href='detail_chocolate.php?id=$transaction->chocolate_id'>
+                                        $transaction->name
+                                    </a>
                                 </th>
                                 <th>
                                     $transaction->amount
