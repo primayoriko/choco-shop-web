@@ -15,7 +15,6 @@ if (!isset($_COOKIE['sessionID'])) {
 }
 
 $session;
-
 $transactions = [];
 
 try {
@@ -94,7 +93,9 @@ try {
                 // $fdate = date_format($transaction->time, "Y/m/d H:i:s");
                 echo "<tr>
                                 <th>
-                                    <a href=''>$transaction->name</a>
+                                    <a href='detail_chocolate.php?id=$transaction->chocolate_id'>
+                                        $transaction->name
+                                    </a>
                                 </th>
                                 <th>
                                     $transaction->amount
