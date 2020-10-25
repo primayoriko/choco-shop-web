@@ -2,42 +2,41 @@
 
 ['validate_token' => $validate_token] = require 'utils/authentication.php';
 ['make_token' => $make_token] = require 'utils/authentication.php';
-['connect_db' => $connect_db] = require 'utils/db_connect.php';
 
-require_once __DIR__ . '/../config/pagination.config.php';
+
+// if (!isset($_COOKIE['sessionID'])) {
+//     header("location: login.php");
+//     exit;
+// }
 
 if (!isset($_COOKIE['sessionID'])) {
     header("location: login.php");
     exit;
 }
 
-$error_message = "";
 $session;
+
+$transactions = [];
 
 try {
     $session = $validate_token($_COOKIE['sessionID']);
     if (!$session['is_valid']) {
         header("location: login.php");
         exit;
-    }
-
-    // Need checking superuser??
-    else if (!$session['is_superuser']) {
-        echo 'asdsadsa';
+    } else if ($session['is_superuser']) {
         header("location: dashboard.php");
         exit;
     }
 
-    $sql = "SELECT * FROM transactions WHERE username = :email";
-    // $sql = "SELECT * FROM transactions WHERE email = :email";
-    $pdo = $connect_db();
-    $stmt = $pdo->prepare($sql);
-    // $stmt->bindParam(':email', $session->email);
-    $stmt->bindParam(':email', $session->username);
 
+    ['connect_db' => $connect_db] = require 'utils/db_connect.php';
+    $sql = "SELECT c.name, t.amount, t.totalprice, t.time, t.address FROM transactions as t, chocolates as c WHERE t.username = :username AND c.id = t.chocolate_id ORDER BY time DESC";
+    $db = $connect_db();
+    $stmt = $db->prepare($sql);
+    $stmt->bindParam(':username', $session['username']);
     $stmt->execute();
-
     $transactions = $stmt->fetchAll(PDO::FETCH_CLASS);
+    // print_r($transactions);
 } catch (Exception $error) {
     $error_message = $error->getMessage();
 }
@@ -46,24 +45,27 @@ try {
 
 <!DOCTYPE html>
 <html>
-<<<<<<< HEAD=======<head>
-    <title>Register</title>
-    <link rel="stylesheet" href="public/css/new_chocolate.css" type="text/css">
-    </head>
 
-    <body>
-        <div class="spacer"></div>
-        <header>
-            Transaction History
-        </header>
-        <div class="spacer"></div>
-        <main>
-            <?php
-            if (count($transactions) === 0) {
-                echo '<div> Nothing to show </div>';
-            } else {
-                echo '<table> ';
-                echo "<tr>
+<head>
+    <title>Register</title>
+    <link rel="stylesheet" href="../public/css/history.css" type="text/css">
+</head>
+
+<body>
+    <main>
+        <?php include('components/header.php') ?>
+        <div class="container">
+            <div class="page-title text-title">
+                Transaction History
+            </div>
+        </div>
+        <?php
+        if (count($transactions) === 0) {
+            echo '<div> Nothing to show </div>';
+        } else {
+
+            echo '<table class="text-content"> ';
+            echo "<tr>
                             <th>
                                 Chocolate Name:
                             </th>
@@ -77,18 +79,20 @@ try {
                                 Date:
                             </th>
                             <th>
-                                Chocolate Name:
-                            </th>
-                            <th>
                                 Time:
                             </th>
                             <th>
                                 Address:
                             </th>
                         </tr>";
-                foreach ($transactions as $transaction) {
-                    $datetime = explode(" ", $transaction->time);
-                    echo "<tr>
+            foreach ($transactions as $transaction) {
+                $datetime = explode(" ", $transaction->time);
+                // $rtime = date_create($transaction->time);
+                print_r($transaction->time);
+                echo "<br>";
+                // echo $rtime;
+                // $fdate = date_format($transaction->time, "Y/m/d H:i:s");
+                echo "<tr>
                                 <th>
                                     <a href=''>$transaction->name</a>
                                 </th>
@@ -99,64 +103,20 @@ try {
                                     $transaction->totalprice
                                 </th>
                                 <th>
-                                    $datetime[0]
+                                   $transaction->time
                                 </th>
                                 <th>
-                                    $datetime[1]
+                                    test
                                 </th>
                                 <th>
                                     $transaction->address
                                 </th>
                             </tr>";
-                }
-
-                echo '</table> ';
             }
-            ?>
-        </main>
-        <div class="spacer"></div>
-        <script>
 
-        </script>
-    </body>
-
-</html>
->>>>>>> f69f7c8986412d060365a16ffa475caaf66610dd
-
-<head>
-    <title>Register</title>
-    <link rel="stylesheet" href="public/css/new_chocolate.css" type="text/css">
-</head>
-
-<body>
-    <div class="spacer"></div>
-    <header>
-        Transaction History
-    </header>
-    <div class="spacer"></div>
-    <main>
-        <table>
-            <tr>
-                <th>
-                    Chocolate Name:
-                </th>
-                <th>
-                    Chocolate Name:
-                </th>
-                <th>
-                    Chocolate Name:
-                </th>
-                <th>
-                    Chocolate Name:
-                </th>
-                <th>
-                    Chocolate Name:
-                </th>
-            </tr>
-            <?php
-
-            ?>
-        </table>
+            echo '</table> ';
+        }
+        ?>
     </main>
     <div class="spacer"></div>
     <script>

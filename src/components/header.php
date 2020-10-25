@@ -27,17 +27,13 @@ if (isset($_GET['search'])) {
             <?php
 
             if ($session['is_superuser']) {
-                echo '<div class="header-menu">
-                        <a href="/src/new_chocolate.php">
-                        Add New Chocolate
-                        </a>
-                 </div>';
+                echo '<a class="header-menu" href="/src/new_chocolate.php">
+                    Add New Chocolate
+                </a>';
             } else if (!$session['is_superuser']) {
-                echo '<div class="header-menu">
-                <a href="/src/transaction_history.php">
-                History
-                </a>
-                </div>';
+                echo '<a class="header-menu" href="/src/transaction_history.php">
+                    History
+                </a>';
             }
             ?>
         </div>
