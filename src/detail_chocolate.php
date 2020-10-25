@@ -20,12 +20,14 @@ if ($session['is_superuser']) {
 
 include('utils/utility.php');
 
-if (isset($_GET['id'])) {
+if (isset($_GET['id']) && filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT)) {
+    $isIdExist = true;
     ['connect_db' => $connect_db] = require 'utils/db_connect.php';
     require_once(__DIR__ . '/../config/image_saving.config.php');
     $asset_dir = '../' . CHOCO_IMG_DIR . '/';
     $db = $connect_db();
     $id = htmlspecialchars(trim($_GET['id']));
+    
     $sql = "SELECT * FROM chocolates WHERE id=$id";
     $chocolate = $db->query($sql)->fetch();
     $sql = "SELECT * FROM transactions WHERE chocolate_id=$id";
@@ -35,6 +37,8 @@ if (isset($_GET['id'])) {
     $chocolate['sold'] = getSold($chocolate['id'], $transactions);
     $fprice = number_format($chocolate['price'], 2, ",", ".");
     extract($chocolate);
+} else {
+    $isIdExist = false;
 }
 ?>
 
@@ -51,6 +55,7 @@ if (isset($_GET['id'])) {
     <main>
         <?php include('components/header.php') ?>
         <div class="container">
+            <?php if ($isIdExist) { ?>
             <div class="page-title text-title"><?php echo $name ?></div>
             <div class="chocolate-container">
                 <div class="image-box">
@@ -65,6 +70,9 @@ if (isset($_GET['id'])) {
                 </div>
                 <a href="<?php echo $mode['link'] . $id ?>"><button class="btn-primary text-subtitle"><?php echo $mode['name'] ?></button></a>
             </div>
+            <?php } else { ?>
+                <div>ERROR</div>
+            <?php } ?>
         </div>
     </main>
 </body>
