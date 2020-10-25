@@ -1,4 +1,18 @@
 <?php
+    ['validate_token' => $validate_token ] = require 'utils/authentication.php';
+    ['make_token' => $make_token ] = require 'utils/authentication.php';
+
+    if(!isset($_COOKIE['sessionID'])){
+        header("location: login.php");
+        exit;
+    }
+
+    $session = $validate_token($_COOKIE['sessionID']);
+    if(!$session['is_valid']) {
+        header("location: login.php");
+        exit;
+    }
+
     include('utils/utility.php');
 
     if (isset($_GET['id'])){
@@ -12,7 +26,7 @@
         $sql = "SELECT * FROM transactions WHERE chocolate_id=$id";
         $transactions = $db->query($sql)->fetchAll();
 
-        $chocolate['image'] = $asset_dir . $chocolate['id'] . $chocolate['extension'];
+        $chocolate['image'] = $asset_dir . $chocolate['id'] . $chocolate['image_extension'];
         $chocolate['sold'] = getSold($chocolate['id'], $transactions);
         $fprice = number_format($chocolate['price'], 2, ",", ".");
         extract($chocolate);
