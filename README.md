@@ -10,7 +10,7 @@ Website Willy Wangky adalah website berbasis php yang digunakan untuk membeli co
 
 1. [XAMPP](https://www.apachefriends.org/index.html)
 2. inisialisasi database (menggunakan `init_db.php` dan `init_dummy_data.php`)
-3. Sejauh ini, browser yang support aplikasi kami hanyalah Mozilla Firefox, karena ada masalah dengan policy setcookie sehingga kami tidak dapat menambahkan cookie dengan set cookie
+3. Sejauh ini, browser yang support aplikasi kami hanyalah **Mozilla Firefox**, karena ada masalah dengan policy setcookie sehingga kami tidak dapat menambahkan cookie dengan set cookie
 
 ## How to Install
 
@@ -29,7 +29,22 @@ Website Willy Wangky adalah website berbasis php yang digunakan untuk membeli co
    ```
    php -S localhost:8000
    ```
-4. Jalankan browser dan pergi ke link `localhost:8000`
+    Sebagai contoh digunakan port 8000.
+
+4. Jalankan browser dan pergi ke link `localhost:8000` .
+   Sebagai contoh jika ingin pergi ke dashboard, pada project kami dapat dilakukan navigasi ke `localhost:8000/src/dasboard.php`
+
+## Screenshot dari Tugas
+-------
+1. Login ![login](./docs/img/login.PNG)
+2. Register ![register](./docs/img/register.PNG)
+3. Dashboard ![dashboard](./docs/img/dashboard.PNG)
+4. New Chocolate ![new-choc](./docs/img/new_choco.PNG)
+5. Search Result ![search](./docs/img/search.PNG)
+6. Transaction History ![history](./docs/img/history.PNG)
+7. Detail ![history](./docs/img/detail.PNG)
+8. Buy Chocolate ![history](./docs/img/detail.PNG)
+9. Add Stock ![history](./docs/img/detail.PNG)
 
 ## Pembagian Tugas
 
