@@ -116,6 +116,11 @@ input[type="number"] {
   border: solid 4px rgb(145, 5, 40);
 }
 
+.form-bawah {
+  display: flex;
+  flex-direction: column;
+}
+
 .btn-group {
   display: flex;
   flex-direction: row;

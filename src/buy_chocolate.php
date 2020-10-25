@@ -101,34 +101,35 @@ if (isset($_GET['id'])) {
                     <!-- price_block -->
                 </div>
             </div>
+            <form class="form-bawah" id="buyChocolate" action="buy_chocolate.php" method="POST">
+                <div class="address-block text-subtitle">
+                    <label> Address: </label>
+                    <textarea class="address-input" name="address" id="address" cols="40" rows="3" placeholder="insert your address"></textarea>
+                </div>
+                <div class="btn-group ">
+                    <button class="btn-secondary text-subtitle"> Cancel </button>
+                    <button class="btn-primary text-subtitle" id="btn-buy">Buy</button>
+                </div>
+            </form>
         </div>
-        <form id="buyChocolate" action="buy_chocolate.php" method="POST">
-            <div class="address-block text-subtitle">
-                <label> Address: </label>
-                <textarea class="address-input" name="address" id="address" cols="40" rows="3" placeholder="insert your address"></textarea>
-            </div>
-            <div class="btn-group ">
-                <button class="btn-secondary text-subtitle"> Cancel </button>
-                <button class="btn-primary text-subtitle" id="btn-buy">Buy</button>
-            </div>
-            </div>
+        </div>
 
-            <script>
-                // console.log(total);
-                // var quantity = document.getElementById('quantity').innerHTML;
-                // var price = document.getElementById('ori-price').innerHTML;
-                // document.getElementById('total-price').innerHTML = quantity * price;
-                // console.log(total);
-                // console.log(quantity);
-                document.getElementById('plus').addEventListener('click', function() {
-                    document.getElementById('quantity').stepUp();
-                    // document.getElementById('total-price').innerHTML = total + quantity * price;
-                })
-                document.getElementById('minus').addEventListener('click', function() {
-                    document.getElementById('quantity').stepDown();
-                    // document.getElementById('total-price').innerHTML = total - quantity * price;
-                })
-            </script>
+        <script>
+            // console.log(total);
+            // var quantity = document.getElementById('quantity').innerHTML;
+            // var price = document.getElementById('ori-price').innerHTML;
+            // document.getElementById('total-price').innerHTML = quantity * price;
+            // console.log(total);
+            // console.log(quantity);
+            document.getElementById('plus').addEventListener('click', function() {
+                document.getElementById('quantity').stepUp();
+                // document.getElementById('total-price').innerHTML = total + quantity * price;
+            })
+            document.getElementById('minus').addEventListener('click', function() {
+                document.getElementById('quantity').stepDown();
+                // document.getElementById('total-price').innerHTML = total - quantity * price;
+            })
+        </script>
     </main>
 </body>
 
