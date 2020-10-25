@@ -98,7 +98,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     </div>
     <main>
         <div class="container">
-            <div class="text-title">
+            <div class="text-title row-title">
                 Add New Chocolate
             </div>
             <form id="newChocolate" action="new_chocolate.php" method="POST" enctype="multipart/form-data">

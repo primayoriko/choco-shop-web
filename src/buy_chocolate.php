@@ -74,10 +74,13 @@ if (isset($_GET['id'])) {
                         <div>
                             <div>Amount to add:</div>
                             <div>Di sini tombol add / amount</div>
+                            <div onclick='minus()'> - </div>
+                            <div id="buy-amount"> 0 </div>
+                            <div onclick='plus()'> + </div>
                         </div>
                         <div>
                             <div>Total Price</div>
-                            <div>Rp 420.000,00</div>
+                            <div>Rp <a id="total-price">0<a>,00</div>
                         </div>
                         <!-- price_block -->
                     </div>
