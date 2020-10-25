@@ -17,5 +17,5 @@ function choco_card_long($choc)
             <div class="text-subtitle">Description</div>
             <p class="text-content">' . $description . '</p>
         </div>
-    </daiv>');
+    </a>');
 }
