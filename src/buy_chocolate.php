@@ -104,7 +104,7 @@ if (isset($_GET['id'])) {
         <form id="buyChocolate" action="buy_chocolate.php" method="POST">
             <div class="address-block text-subtitle">
                 <label> Address: </label>
-                <div class="address-input"> Textbox </div>
+                <textarea class="address-input" name="address" id="address" cols="40" rows="3" placeholder="insert your address"></textarea>
             </div>
             <div class="btn-group ">
                 <button class="btn-secondary text-subtitle"> Cancel </button>
