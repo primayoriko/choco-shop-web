@@ -72,9 +72,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
         header("location: dashboard.php");
         exit;
-
-    } 
-    catch(Exception $error){
+    } catch (Exception $error) {
         $error_message = $error->getMessage();
     }
 }
@@ -108,52 +106,52 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                             Name:
                         </th>
                         <td>
-                            <input class="text-input" id="nameField" name="name">
+                            <input class="text-input" id="nameField" name="name" required>
                         </td>
                     </tr>
-    
+
                     <tr>
                         <th class="text-content">
                             Price:
                         </th>
                         <td>
-                            <input class="text-input" id="priceField" name="price">
+                            <input class="text-input" id="priceField" name="price" required>
                         </td>
                     </tr>
-    
+
                     <tr>
                         <th class="text-content">
                             Description:
                         </th>
                         <td>
-                            <textarea class="text-input" rows="4" cols="50" form="newChocolate" id="descriptionField" name="description"></textarea>
+                            <textarea class="text-input" rows="4" cols="50" form="newChocolate" id="descriptionField" name="description" required></textarea>
                         </td>
                     </tr>
-    
+
                     <tr>
                         <th class="text-content">
                             Image:
                         </th>
                         <td>
-                            <input class="text-input" type="file" id="imageField" name="image">
+                            <input class="text-input" type="file" id="imageField" name="image" required>
                         </td>
                     </tr>
-    
+
                     <tr>
                         <th class="text-content">
                             Amount:
                         </th>
                         <td>
-                            <input class="text-input" id="amountField" name="amount">
+                            <input class="text-input" id="amountField" name="amount" required>
                         </td>
                     </tr>
-    
+
                     <tr>
                         <th class="text-content">
-    
+
                         </th>
                         <td>
-                            <button class="btn-primary" type="submit" form="newChocolate">
+                            <button class="btn-primary text-subtitle" type="submit" form="newChocolate">
                                 Add Chocolate
                             </button>
                         </td>

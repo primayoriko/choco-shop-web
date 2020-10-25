@@ -60,8 +60,8 @@ Website Willy Wangky adalah website berbasis php yang digunakan untuk membeli co
 9. New Chocolate: 13518146
 10. DB Model: 13518146
 
-### Bonus 
+### Bonus
 
 1. Expire time session at DB: 13518146
-2. AJAX di real-time stock: 13518146, 
+2. AJAX di real-time stock: 13518146,
 3. Responsive: ....

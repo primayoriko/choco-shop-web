@@ -71,34 +71,56 @@ if (isset($_GET['id'])) {
 
                     </div>
                     <div class="amount-modifier text-content">
-                        <div>
+                        <form id="buyChocolate" action="buy_chocolate.php" method="POST">
+                            <?php
+                            if ($amount === 0) {
+                                echo "<div> Items is currently sold out.. </div>";
+                            } else {
+                                echo '
                             <div>Amount to add:</div>
-                            <div>Di sini tombol add / amount</div>
-                            <div onclick='minus()'> - </div>
-                            <div id="buy-amount"> 0 </div>
-                            <div onclick='plus()'> + </div>
+                            <div class="mod text-subtitle">
+                                <div id="minus" onclick="minus()"> - </div>
+                                <input type="number" id="quantity" name="quantity" min="1" max="' . $amount . '">
+                                
+                                <button id="plus"> + </button>
+                            </div>
                         </div>
                         <div>
                             <div>Total Price</div>
                             <div>Rp <a id="total-price">0<a>,00</div>
                         </div>
-                        <!-- price_block -->
+                            ';
+                            }
+                            ?>
                     </div>
+                    <div>
+                        <div>Total Price</div>
+                        <div>Rp <a id="total-price">0<a>,00</div>
+                    </div>
+                    <!-- price_block -->
                 </div>
             </div>
-            <div class="address-block">
-                <div> Address: </div>
+        </div>
+        <form id="buyChocolate" action="buy_chocolate.php" method="POST">
+            <div class="address-block text-subtitle">
+                <label> Address: </label>
                 <div class="address-input"> Textbox </div>
             </div>
             <div class="btn-group ">
                 <button class="btn-secondary text-subtitle"> Cancel </button>
                 <button class="btn-primary text-subtitle" id="btn-buy">Buy</button>
             </div>
-        </div>
+            </div>
 
-        <script>
+            <script>
+                document.getElementById('plus').addEventListener('click', function() {
+                    console.log("plus");
+                })
 
-        </script>
+                function plus() {
+                    console.log(document.getElementById('plus').value())
+                }
+            </script>
     </main>
 </body>
 

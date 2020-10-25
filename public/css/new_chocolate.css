@@ -37,3 +37,8 @@ textarea {
   font-size: 30px;
   color: white;
 }
+
+th {
+  padding-right: 1rem;
+  color: white;
+}
