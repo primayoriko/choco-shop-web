@@ -4,10 +4,16 @@
   display: block;
 }
 
+.page-title {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  margin: 1rem 0 3rem;
+}
+
 .chocolate-container {
   position: relative;
   display: flex;
-  margin-top: 20px;
 }
 
 .image-box {

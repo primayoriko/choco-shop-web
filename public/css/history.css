@@ -1,0 +1,22 @@
+@import "./index.css";
+
+.page-title {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  margin: 1rem 0 3rem;
+}
+
+.table-container {
+  display: flex;
+  flex-grow: 1;
+}
+
+table {
+  width: 100%;
+  border: solid 2px var(--primary);
+}
+
+td {
+  font-weight: 500;
+}

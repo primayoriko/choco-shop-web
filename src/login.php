@@ -1,62 +1,65 @@
 <?php
-    ['validate_token' => $validate_token ] = require 'utils/authentication.php';
-    ['make_token' => $make_token ] = require 'utils/authentication.php';
-    ['connect_db' => $connect_db ] = require 'utils/db_connect.php';
+['validate_token' => $validate_token] = require 'utils/authentication.php';
+['make_token' => $make_token] = require 'utils/authentication.php';
+['connect_db' => $connect_db] = require 'utils/db_connect.php';
 
-    $error_message = "";
+$error_message = "";
 
-    $session = array();
-    if(isset($_COOKIE["sessionID"])){
-        try{
-            $session = $validate_token($_COOKIE["sessionID"]);
-            if($session['is_valid']){
-                header("location: dashboard.php");
-                exit;
-            }
-            $error_message = $session['message'];
+$session = array();
+if (isset($_COOKIE["sessionID"])) {
+    try {
+        $session = $validate_token($_COOKIE["sessionID"]);
+        if ($session['is_valid']) {
+            header("location: dashboard.php");
+            exit;
         }
-        catch(Exception $error){
-            $error_message = $error->getMessage();
-        }
+        $error_message = $session['message'];
+    } catch (Exception $error) {
+        $error_message = $error->getMessage();
     }
+}
 
 
-    if($_SERVER["REQUEST_METHOD"] === "POST"){
-        $email = trim($_POST["email"]);
-        $password = trim($_POST["password"]);
-        try{
-            $token = $make_token($email, $password);
-            if($token['is_success']){
-                // echo $token['session_id'];
-                setcookie('sessionID', $token['session_id'], [
-                    'expires' => time() + 3600 * 5,
-                    'path' => '/',
-                    'domain' => 'localhost',
-                    'secure' => true,
-                    'httponly' => true,
-                    'samesite' => 'None',
-                ]);
-                header("location: dashboard.php");
-                exit;
-            } else {
-                $error_message = $token['message'];
-            }
-        } 
-        catch (Exception $error){
-            $error_message = $error->getMessage();
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
+    $email = trim($_POST["email"]);
+    $password = trim($_POST["password"]);
+    try {
+        $token = $make_token($email, $password);
+        if ($token['is_success']) {
+            // echo $token['session_id'];
+            setcookie('sessionID', $token['session_id'], [
+                'expires' => time() + 3600 * 5,
+                'path' => '/',
+                'domain' => 'localhost',
+                'secure' => true,
+                'httponly' => true,
+                'samesite' => 'None',
+            ]);
+            header("location: dashboard.php");
+            exit;
+        } else {
+            $error_message = $token['message'];
         }
+    } catch (Exception $error) {
+        $error_message = $error->getMessage();
     }
-    
+}
+
 ?>
 
 <!DOCTYPE html>
 <html>
 
 <head>
+<<<<<<< HEAD
+    <title>Login</title>
+    <link rel="stylesheet" href="../public/css/login_register.css" type="text/css">
+=======
     <link rel="stylesheet" href="../public/css/logreg.css" type="text/css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
+>>>>>>> 1ac459388daad2ac10bcc0df01ec114e9753475d
 </head>
 
 <body>

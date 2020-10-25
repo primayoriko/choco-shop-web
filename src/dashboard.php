@@ -1,17 +1,17 @@
 <?php
-    ['validate_token' => $validate_token ] = require 'utils/authentication.php';
-    ['make_token' => $make_token ] = require 'utils/authentication.php';
+['validate_token' => $validate_token] = require 'utils/authentication.php';
+['make_token' => $make_token] = require 'utils/authentication.php';
 
-    if(!isset($_COOKIE['sessionID'])){
-        header("location: login.php");
-        exit;
-    }
+if (!isset($_COOKIE['sessionID'])) {
+    header("location: login.php");
+    exit;
+}
 
-    $session = $validate_token($_COOKIE['sessionID']);
-    if(!$session['is_valid']) {
-        header("location: login.php");
-        exit;
-    }
+$session = $validate_token($_COOKIE['sessionID']);
+if (!$session['is_valid']) {
+    header("location: login.php");
+    exit;
+}
 ?>
 
 <!DOCTYPE html>

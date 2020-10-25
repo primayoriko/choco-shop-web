@@ -1,15 +1,41 @@
 <?php
-// session_start();
-// if (!isset($_SESSION["loggedIn"]) || !$_SESSION["loggedIn"]) {
-//     header("location: login.php");
-//     exit;
-// }
+['validate_token' => $validate_token] = require 'utils/authentication.php';
+['make_token' => $make_token] = require 'utils/authentication.php';
 
+if (!isset($_COOKIE['sessionID'])) {
+    header("location: login.php");
+    exit;
+}
 
-// if (!isset($_SESSION['isSuperuser']) || !$_SESSION['isSuperuser']) {
-//     header("location: dashboard.php")
-// }
+$session = $validate_token($_COOKIE['sessionID']);
+if (!$session['is_valid']) {
+    header("location: login.php");
+    exit;
+}
+if ($session['is_superuser']) {
+    $mode = ['link' => '/src/add_chocolate.php?id=', 'name' => 'Add Stock'];
+} else {
+    $mode = ['link' => '/src/buy_chocolate.php?id=', 'name' => 'Buy Now'];
+}
 
+include('utils/utility.php');
+
+if (isset($_GET['id'])) {
+    ['connect_db' => $connect_db] = require 'utils/db_connect.php';
+    require_once(__DIR__ . '/../config/image_saving.config.php');
+    $asset_dir = '../' . CHOCO_IMG_DIR . '/';
+    $db = $connect_db();
+    $id = htmlspecialchars(trim($_GET['id']));
+    $sql = "SELECT * FROM chocolates WHERE id=$id";
+    $chocolate = $db->query($sql)->fetch();
+    $sql = "SELECT * FROM transactions WHERE chocolate_id=$id";
+    $transactions = $db->query($sql)->fetchAll();
+
+    $chocolate['image'] = $asset_dir . $chocolate['id'] . $chocolate['image_extension'];
+    $chocolate['sold'] = getSold($chocolate['id'], $transactions);
+    $fprice = number_format($chocolate['price'], 2, ",", ".");
+    extract($chocolate);
+}
 
 ?>
 
@@ -19,30 +45,29 @@
 
 <head>
     <title>Willy Wangky Chocolate Factory</title>
-    <link rel="stylesheet" href="../public/css/index.css" type="text/css">
     <link rel="stylesheet" href="../public/css/buy_add_chocolate.css" type="text/css">
 </head>
 
 <body>
     <main>
-    <?php include('components/header.php') ?>
+        <?php include('components/header.php') ?>
         <div class="container">
             <div class="page-title text-title">
                 Buy Chocolate
             </div>
             <div class="choco-container">
-                <div class="choco-image">
-                    Image
+                <div class="image-box">
+                    <img class="image" alt="<?php echo $name ?>" src="<?php echo $image ?>">
                 </div>
                 <div class="choco-right">
 
-                <div class="choco-props text-content">
-                        <div class="choco-title text-title" id="choco-title">Choco Name 1</div>
-                        <div>Amount sold: <span id="choco-sold"> 6 </span></div>
-                        <div>Price: <span id="choco-price"> Rp. 3.000,00 </span></div>
-                        <div>Amount Remaining: <span id="choco-stock"> 15 </span></div>
+                    <div class="choco-props text-content">
+                        <div class="choco-title text-title" id="choco-title"><?php echo $name ?></div>
+                        <div>Amount sold: <span id="choco-sold"><?php echo $sold ?></span></div>
+                        <div>Price: <span id="choco-price"><?php echo "Rp " . $fprice ?></span></div>
+                        <div>Amount Remaining: <span id="choco-stock"> <?php echo $amount ?></span></div>
                         <div>Description:</div>
-                        <div class="choco-desc" id="choco-desc"> Lorem ipsum sampe mampus</div>
+                        <div class="choco-desc" id="choco-desc"><?php echo $description ?></div>
 
                     </div>
                     <div class="amount-modifier text-content">
@@ -62,15 +87,15 @@
                 <div> Address: </div>
                 <div class="address-input"> Textbox </div>
             </div>
-                <div class="btn-group ">
-                    <button class="btn-secondary text-subtitle"> Cancel </button>
-                    <button class="btn-primary text-subtitle" id="btn-buy">Buy</button>
-                </div>
+            <div class="btn-group ">
+                <button class="btn-secondary text-subtitle"> Cancel </button>
+                <button class="btn-primary text-subtitle" id="btn-buy">Buy</button>
             </div>
+        </div>
 
-            <script>
+        <script>
 
-            </script>
+        </script>
     </main>
 </body>
 
