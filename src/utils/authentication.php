@@ -40,7 +40,7 @@
         }
     };
 
-    $make_token = function($username, $password){
+    $make_token = function($email, $password){
         require_once __DIR__ . '/../../config/auth.config.php';
         ['connect_db' => $connect_db ] = require __DIR__ . '/db_connect.php';
 
@@ -50,28 +50,29 @@
         $expire_time = date('Y-m-d H:i:s', 
                 strtotime('+4 hour +20 minutes',strtotime($curr_time)));
 
-        $username = trim($username);
+        $email = trim($email);
         $password = trim($password);
         
         $pdo = $connect_db();
-        $sql = "SELECT * FROM users WHERE username = :username";
+        $sql = "SELECT * FROM users WHERE email = :email";
 
         $stmt = $pdo->prepare($sql);
-        $stmt->bindParam(":username", $username);
+        $stmt->bindParam(":email", $email);
 
         try{
             $stmt->execute();
             if($stmt->rowCount() === 1){
                 $user = $stmt->fetch(PDO::FETCH_OBJ);
                 if(password_verify($password, $user->password_hash)){
-                    $hash_id = hash_hmac('sha256', $username . $curr_time, SECRET_KEY);
+                    $hash_id = hash_hmac('sha256', $email . $curr_time, SECRET_KEY);
 
-                    $sql = "INSERT INTO sessions (hash_id, username, is_superuser, login_time, expire_time)
-                                VALUES (:hash_id, :username, :is_superuser, :login_time, :expire_time)";
+                    $sql = "INSERT INTO sessions (hash_id, username, email, is_superuser, login_time, expire_time)
+                                VALUES (:hash_id, :username, :email, :is_superuser, :login_time, :expire_time)";
                     
                     $stmt = $pdo->prepare($sql);
                     $stmt->bindParam(":hash_id", $hash_id);
-                    $stmt->bindParam(":username", $username);
+                    $stmt->bindParam(":username", $user->username);
+                    $stmt->bindParam(":email", $email);
                     $stmt->bindParam(":is_superuser", $user->is_superuser);
                     $stmt->bindParam(":login_time", $curr_time);
                     $stmt->bindParam(":expire_time", $expire_time);
@@ -82,8 +83,8 @@
                         'is_success' => true,
                         'message' => 'login success',
                         'session_id' => $hash_id,
-                        'username' => $username,
-                        'email' => $user->email,
+                        'username' => $user->username,
+                        'email' => $email,
                         'is_superuser' => $user->is_superuser,
                         'login_time' => $curr_time,
                         'expire_time'=> $expire_time
@@ -93,14 +94,14 @@
                 else {
                     return array(
                             'is_success' => false,
-                            'message' => 'password or username wrong'
+                            'message' => 'password or email wrong'
                         );
                 }
             }
             else {
                 return array(
                     'is_success' => false,
-                    'message' => 'password or username wrong'
+                    'message' => 'password or email wrong'
                 );
             }
             

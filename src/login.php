@@ -22,10 +22,10 @@
 
 
     if($_SERVER["REQUEST_METHOD"] === "POST"){
-        $username = trim($_POST["username"]);
+        $email = trim($_POST["email"]);
         $password = trim($_POST["password"]);
         try{
-            $token = $make_token($username, $password);
+            $token = $make_token($email, $password);
             if($token['is_success']){
                 // echo $token['session_id'];
                 setcookie('sessionID', $token['session_id'], [
@@ -70,16 +70,16 @@
         <form id="login" action="login.php" method="POST">
             <table>
                 <tr>
-                    <th>Username</th>
+                    <th>Email</th>
                 </tr>
                 <tr>
                     <td>
-                        <input id="usernameField" name="username">
+                        <input id="emailField" name="email" type=email>
                     </td>
                 </tr>
-                <tr id="usernameErrorRow" style="display: none">
+                <tr id="emailErrorRow" style="display: none">
                     <td>
-                        <p id="usernameError"> </p>
+                        <p id="emailError"> </p>
                     </td>
                 </tr>
                 <tr>
@@ -101,9 +101,6 @@
         </form>
     </main>
     <div class="spacer"></div>
-    <script>
-
-    </script>
 </body>
 
 </html>
