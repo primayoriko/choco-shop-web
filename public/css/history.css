@@ -6,3 +6,36 @@
   align-items: flex-start;
   margin: 1rem 0 3rem;
 }
+
+.table-container {
+  display: flex;
+  flex-grow: 1;
+}
+
+table {
+  width: 100%;
+  border: solid 4px var(--primary);
+  border-collapse: collapse;
+  border-radius: 2rem;
+}
+
+th {
+  text-align: start;
+}
+
+thead {
+  border-bottom: solid 4px var(--primary);
+}
+
+td,
+th {
+  padding: 1rem;
+}
+
+tr:nth-child(even) {
+  background-color: var(--primary-light2);
+}
+
+.choco-title:hover {
+  font-weight: 600;
+}

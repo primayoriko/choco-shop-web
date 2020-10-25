@@ -29,13 +29,12 @@ try {
 
 
     ['connect_db' => $connect_db] = require 'utils/db_connect.php';
-    $sql = "SELECT c.name, t.amount, t.totalprice, t.time, t.address FROM transactions as t, chocolates as c WHERE t.username = :username AND c.id = t.chocolate_id ORDER BY time DESC";
+    $sql = "SELECT c.name, t.chocolate_id, t.amount, t.totalprice, t.time, t.address FROM transactions as t, chocolates as c WHERE t.username = :username AND c.id = t.chocolate_id ORDER BY time DESC";
     $db = $connect_db();
     $stmt = $db->prepare($sql);
     $stmt->bindParam(':username', $session['username']);
     $stmt->execute();
     $transactions = $stmt->fetchAll(PDO::FETCH_CLASS);
-    // print_r($transactions);
 } catch (Exception $error) {
     $error_message = $error->getMessage();
 }
@@ -77,6 +76,7 @@ try {
             <div class="page-title text-title">
                 Transaction History
             </div>
+<<<<<<< HEAD
         </div>
         <?php
         if (count($transactions) === 0) {
@@ -88,59 +88,73 @@ try {
 >>>>>>> a60f45c37ad68eadaae449b0be314fb2f1620ae7
                             <th>
                                 Chocolate Name:
+=======
+            <div class="table-container">
+                <?php
+                if (count($transactions) === 0) {
+                    echo '<div> Nothing to show </div>';
+                } else {
+
+                    echo '<table class="text-subtitle"> ';
+                    echo "<thead>
+                    <tr>
+                            <th >
+                                Chocolate Name
+>>>>>>> 4b857b42dc279c54707e8cbd731e2c06c9875d49
                             </th>
                             <th>
-                                Amount:
+                                Amount
                             </th>
                             <th>
-                                Total Price:
+                                Total Price
                             </th>
                             <th>
-                                Date:
+                                Date
                             </th>
                             <th>
-                                Time:
+                                Time
                             </th>
                             <th>
-                                Address:
+                                Address
                             </th>
-                        </tr>";
-            foreach ($transactions as $transaction) {
-                $datetime = explode(" ", $transaction->time);
-                // $rtime = date_create($transaction->time);
-                print_r($transaction->time);
-                echo "<br>";
-                // echo $rtime;
-                // $fdate = date_format($transaction->time, "Y/m/d H:i:s");
-                echo "<tr>
-                                <th>
-                                    <a href='detail_chocolate.php?id=$transaction->chocolate_id'>
+                        </tr>
+                        </thead>
+                        <tbody>";
+                    foreach ($transactions as $transaction) {
+                        $rtime = date_create($transaction->time);
+                        $fdate = date_format($rtime, "d F y");
+                        $ftime = date_format($rtime, "H:i:s");
+                        $fprice = number_format($transaction->totalprice, 2, ",", ".");
+                        echo "<tr >
+                                <td>
+                                    <a class='choco-title' href='detail_chocolate.php?id=$transaction->chocolate_id'>
                                         $transaction->name
                                     </a>
-                                </th>
-                                <th>
+                                </td>
+                                <td>
                                     $transaction->amount
-                                </th>
-                                <th>
-                                    $transaction->totalprice
-                                </th>
-                                <th>
-                                   $transaction->time
-                                </th>
-                                <th>
-                                    test
-                                </th>
-                                <th>
+                                </td>
+                                <td>
+                                    Rp $fprice
+                                </td>
+                                <td>
+                                   $fdate
+                                </td>
+                                <td>
+                                    $ftime
+                                </td>
+                                <td>
                                     $transaction->address
-                                </th>
+                                </td>
                             </tr>";
-            }
+                    }
 
-            echo '</table> ';
-        }
-        ?>
+                    echo '</tbody></table> ';
+                }
+                ?></div>
+        </div>
+
     </main>
-    <div class="spacer"></div>
     <script>
 
     </script>
