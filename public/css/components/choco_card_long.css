@@ -17,7 +17,7 @@
 .card-image {
   height: 100%;
   max-width: 400px;
-  object-fit: contain;
+  object-fit: cover;
   display: block;
   backface-visibility: hidden;
 }
@@ -34,4 +34,35 @@
 
 .card-title:hover {
   font-weight: 600;
+}
+
+@media only screen and (max-width: 800px) {
+  .card-image {
+    max-width: 300px;
+    object-fit: cover;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .choco-card {
+    width: 80vw;
+    height: 150px;
+    margin: 2rem 0;
+  }
+  .card-image-box {
+    height: 15rem;
+  }
+  .card-image {
+    max-width: 150px;
+    object-fit: cover;
+  }
+  .text-subtitle {
+    font-size: 12px;
+  }
+  .text-content {
+    font-size: 11px;
+  }
+  .card-desc .text-title {
+    font-size: 17px;
+  }
 }
