@@ -51,15 +51,10 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 <html>
 
 <head>
-<<<<<<< HEAD
-    <title>Login</title>
-    <link rel="stylesheet" href="../public/css/login_register.css" type="text/css">
-=======
     <link rel="stylesheet" href="../public/css/logreg.css" type="text/css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
->>>>>>> 1ac459388daad2ac10bcc0df01ec114e9753475d
 </head>
 
 <body>
