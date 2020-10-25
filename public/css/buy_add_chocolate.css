@@ -51,12 +51,43 @@
 
 .amount-modifier {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  margin-top: 4rem;
 }
 
 .mod {
   display: flex;
   flex-direction: row;
+  margin-top: 1rem;
+}
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+.mod-number {
+  margin: 0 2rem;
+  text-align: center;
+  width: 10rem;
+  border: solid 2px var(--primary2);
+  border-radius: 3rem;
+}
+
+.total-container {
+  padding-left: 3rem;
+  display: flex;
+  flex-direction: column;
+}
+.total-display {
+  display: flex;
+  flex-grow: 1;
+  align-items: center;
 }
 
 #plus,
@@ -72,14 +103,22 @@
   font-size: 30px;
   font-weight: 700;
   cursor: pointer;
+  border: solid 4px rgb(0, 161, 86);
 }
 
 #plus {
   background-color: rgb(35, 198, 108);
+  border: solid 4px rgb(0, 161, 86);
 }
 
 #minus {
   background-color: rgb(211, 12, 61);
+  border: solid 4px rgb(145, 5, 40);
+}
+
+.form-bawah {
+  display: flex;
+  flex-direction: column;
 }
 
 .btn-group {
