@@ -25,6 +25,7 @@
                     'is_valid' => true,
                     'message' => 'token valid',
                     'username' => $session->username,
+                    'email' => $session->email,
                     'is_superuser' => $session->is_superuser
                 );
             } 
@@ -42,6 +43,8 @@
     $make_token = function($username, $password){
         require_once __DIR__ . '/../../config/auth.config.php';
         ['connect_db' => $connect_db ] = require __DIR__ . '/db_connect.php';
+
+        date_default_timezone_set('Asia/Jakarta');
 
         $curr_time = date("Y-m-d H:i:s");
         $expire_time = date('Y-m-d H:i:s', 
@@ -80,6 +83,7 @@
                         'message' => 'login success',
                         'session_id' => $hash_id,
                         'username' => $username,
+                        'email' => $user->email,
                         'is_superuser' => $user->is_superuser,
                         'login_time' => $curr_time,
                         'expire_time'=> $expire_time
@@ -107,7 +111,7 @@
     };
 
     $destroy_token = function($hash_id){
-        ['connect_db' => $connect_db ] = require __DIR__ . '/db_connect.php';
+        // ['connect_db' => $connect_db ] = require __DIR__ . '/db_connect.php';
         
     };
 

@@ -24,15 +24,22 @@
         exit;
     }
 
-    $session = $validate_token($_COOKIE['sessionID']);
-    // if(!$session['is_valid']) {
-    //     header("location: login.php");
-    //     exit;
-    // }
-    // else if(!$session['is_superuser']){
-    //     header("location: dashboard.php");
-    //     exit;
-    // }
+    $session;
+
+    try{
+        $session = $validate_token($_COOKIE['sessionID']);
+        if(!$session['is_valid']) {
+            header("location: login.php");
+            exit;
+        }
+        else if(!$session['is_superuser']){
+            header("location: dashboard.php");
+            exit;
+        }
+    } 
+    catch (Exception $error) {
+        $error_message = $error->getMessage();
+    }
 
     require_once(__DIR__ . '/../config/image_saving.config.php');
 
@@ -49,7 +56,7 @@
         $mime_type = $finfo->file($_FILES['image']['tmp_name']);
 
         // ADD FILE CHECKING HERE IF NEEDED
-        
+
         try{
             $sql = "INSERT INTO chocolates(name, price, description, amount, image_extension)
                         VALUES (:name, :price, :description, :amount, :image_extension)";
@@ -71,7 +78,8 @@
             // header("location: login.php");
             // exit;
 
-        } catch(Exception $error){
+        } 
+        catch(Exception $error){
             $error_message = $error->getMessage();
         }
     }

@@ -4,7 +4,7 @@ include '../utils/utility.php';
 $menu_list = [];
 ['connect_db' => $connect_db] = require '../utils/db_connect.php';
 require_once(__DIR__ . '/../../config/image_saving.config.php');
-$asset_dir = '../../' . CHOCO_IMG_DIR . '/';
+$asset_dir = '../../' . CHOCO_IMG_DIR;
 $db = $connect_db();
 $sql = "SELECT * FROM chocolates";
 $menu_list = $db->query($sql)->fetchAll();
