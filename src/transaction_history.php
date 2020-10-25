@@ -59,7 +59,7 @@ try {
             <div class="table-container">
                 <?php
                 if (count($transactions) === 0) {
-                    echo '<div> Nothing to show </div>';
+                    echo '<div class="text-subtitle "> Anda belum melakukan transaksi :( </div>';
                 } else {
 
                     echo '<table class="text-subtitle"> ';
