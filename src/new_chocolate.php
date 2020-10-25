@@ -25,14 +25,14 @@
     }
 
     $session = $validate_token($_COOKIE['sessionID']);
-    if(!$session['is_valid']) {
-        header("location: login.php");
-        exit;
-    }
-    else if(!$session['is_superuser']){
-        header("location: dashboard.php");
-        exit;
-    }
+    // if(!$session['is_valid']) {
+    //     header("location: login.php");
+    //     exit;
+    // }
+    // else if(!$session['is_superuser']){
+    //     header("location: dashboard.php");
+    //     exit;
+    // }
 
     require_once(__DIR__ . '/../config/image_saving.config.php');
 
@@ -43,32 +43,39 @@
         $price = $_POST["price"];
         $description = $_POST["description"];
         $amount = $_POST["amount"];
-        $extension = $_FILE["image"][""];
+        $image_extension = pathinfo($_FILES['image']['name'], PATHINFO_EXTENSION);
+
+        $finfo = new finfo(FILEINFO_MIME_TYPE);
+        $mime_type = $finfo->file($_FILES['image']['tmp_name']);
 
         // ADD FILE CHECKING HERE IF NEEDED
+        
+        try{
+            $sql = "INSERT INTO chocolates(name, price, description, amount, image_extension)
+                        VALUES (:name, :price, :description, :amount, :image_extension)";
 
-        $sql = "INSERT INTO chocolates(name, price, description, amount, extension),
-                        VALUES (:name, :price, :description, :amount, :extension)";
+            $pdo = $connect_db();
+            $stmt = $pdo->prepare($sql);
+            $stmt->bindParam(":name", $name);
+            $stmt->bindParam(":price", $price);
+            $stmt->bindParam(":description", $description);
+            $stmt->bindParam(":amount", $amount);
+            $stmt->bindParam(":image_extension", $image_extension);
 
-        $stmt = $pdo->prepare($sql);
-        $stmt->bindParam(":name", $name);
-        $stmt->bindParam(":price", $price);
-        $stmt->bindParam(":description", $description);
-        $stmt->bindParam(":amount", $amount);
-        $stmt->bindParam(":extension", $extension);
+            $stmt->execute();
+            $id = $pdo->lastInsertId();
+            // $new_filepath = __DIR__ . "/../" . CHOCO_IMG_DIR . $id . $image_extension;
+            $new_filepath =  '../' . CHOCO_IMG_DIR .  $id . '.' . $image_extension;
+            move_uploaded_file($_FILES["image"]["tmp_name"], $new_filepath);
 
-        if ($stmt->execute()) {
-            $id = $db->lastInsertId();
-            $new_filepath = __DIR__ . "/../" . CHOCO_IMG_DIR . $id . $file_ext;
+            // header("location: login.php");
+            // exit;
 
-            if (move_uploaded_file($_FILES["image"]["tmp_name"], $new_filepath)) {
-            } else {
-            }
-        } else {
+        } catch(Exception $error){
+            $error_message = $error->getMessage();
         }
-
-        $image = $_FILES["image"];
     }
+        
 ?>
 
 <!DOCTYPE html>
@@ -87,7 +94,7 @@
         <?php echo $error_message ?>
     </div>
     <main>
-        <form id="newChocolate" action="new_chocolate.php" method="POST">
+        <form id="newChocolate" action="new_chocolate.php" method="POST" enctype="multipart/form-data">
             <table>
                 <tr>
                     <th>
