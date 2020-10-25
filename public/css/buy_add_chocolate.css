@@ -54,6 +54,34 @@
   flex-direction: column;
 }
 
+.mod {
+  display: flex;
+  flex-direction: row;
+}
+
+#plus,
+#minus {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 4rem;
+  height: 4rem;
+  text-align: center;
+  border-radius: 50%;
+  color: white;
+  font-size: 30px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+#plus {
+  background-color: rgb(35, 198, 108);
+}
+
+#minus {
+  background-color: rgb(211, 12, 61);
+}
+
 .btn-group {
   display: flex;
   flex-direction: row;
