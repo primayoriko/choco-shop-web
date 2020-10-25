@@ -80,7 +80,7 @@ if (isset($_GET['id'])) {
                             } else {
                                 echo '
                             <div>
-                                <div>Amount to add:</div>
+                                <div>Amount to buy:</div>
                                 <div class="mod text-subtitle">
                                     <button type="button" id="minus"> - </button>
                                     <input class="mod-number text-subtitle" type="number" id="quantity" name="quantity" min="1" max="' . $amount . '">
