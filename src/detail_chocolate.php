@@ -1,4 +1,23 @@
 <?php
+    ['validate_token' => $validate_token ] = require 'utils/authentication.php';
+    ['make_token' => $make_token ] = require 'utils/authentication.php';
+
+    if(!isset($_COOKIE['sessionID'])){
+        header("location: login.php");
+        exit;
+    }
+
+    $session = $validate_token($_COOKIE['sessionID']);
+    if(!$session['is_valid']) {
+        header("location: login.php");
+        exit;
+    }
+    if ($session['is_superuser']){
+        $mode = ['link' => '/src/add_chocolate.php?id=', 'name' => 'Add Stock'];
+    } else {
+        $mode = ['link' => '/src/buy_chocolate.php?id=', 'name' => 'Buy Now'];
+    }
+
     include('utils/utility.php');
 
     if (isset($_GET['id'])){
@@ -12,7 +31,7 @@
         $sql = "SELECT * FROM transactions WHERE chocolate_id=$id";
         $transactions = $db->query($sql)->fetchAll();
 
-        $chocolate['image'] = $asset_dir . $chocolate['id'] . $chocolate['extension'];
+        $chocolate['image'] = $asset_dir . $chocolate['id'] . $chocolate['image_extension'];
         $chocolate['sold'] = getSold($chocolate['id'], $transactions);
         $fprice = number_format($chocolate['price'], 2, ",", ".");
         extract($chocolate);
@@ -42,7 +61,7 @@
                     <div class="text-subtitle">Description</div>
                     <p class="text-content"><?php echo $description ?></p>
                 </div>
-                <a href="/src/buy_chocolate.php?id=<?php echo $id ?>"><button class="btn-primary">Buy Now</button></a>
+                <a href="<?php echo $mode['link'] . $id ?>"><button class="btn-primary"><?php echo $mode['name'] ?></button></a>
             </div>
         </div>
     </main>

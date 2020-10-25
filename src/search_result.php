@@ -1,4 +1,18 @@
 <?php
+    ['validate_token' => $validate_token ] = require 'utils/authentication.php';
+    ['make_token' => $make_token ] = require 'utils/authentication.php';
+
+    if(!isset($_COOKIE['sessionID'])){
+        header("location: login.php");
+        exit;
+    }
+
+    $session = $validate_token($_COOKIE['sessionID']);
+    if(!$session['is_valid']) {
+        header("location: login.php");
+        exit;
+    }
+
     define('PAGINATION', 3);
     $search_result = [];
     $nama = '';
@@ -48,7 +62,7 @@
         <?php include('components/header.php') ?>
         <div class="container">
             <?php foreach ($search_result as $chocolate) {
-                $chocolate['image'] = $asset_dir . $chocolate['id'] . $chocolate['extension'];
+                $chocolate['image'] = $asset_dir . $chocolate['id'] . $chocolate['image_extension'];
                 $chocolate['sold'] = getSold($chocolate['id'], $transactions);
                 choco_card_long($chocolate);
             } ?>
