@@ -1,53 +1,50 @@
 <?php
 
-    ['validate_token' => $validate_token ] = require 'utils/authentication.php';
-    ['make_token' => $make_token ] = require 'utils/authentication.php';
-    ['connect_db' => $connect_db ] = require 'utils/db_connect.php';
+['validate_token' => $validate_token] = require 'utils/authentication.php';
+['make_token' => $make_token] = require 'utils/authentication.php';
 
-    require_once __DIR__ . '/../config/pagination.config.php';
 
-    if(!isset($_COOKIE['sessionID'])){
+// if (!isset($_COOKIE['sessionID'])) {
+//     header("location: login.php");
+//     exit;
+// }
+
+if (!isset($_COOKIE['sessionID'])) {
+    header("location: login.php");
+    exit;
+}
+
+$session;
+$transactions = [];
+
+try {
+    $session = $validate_token($_COOKIE['sessionID']);
+    if (!$session['is_valid']) {
         header("location: login.php");
+        exit;
+    } else if ($session['is_superuser']) {
+        header("location: dashboard.php");
         exit;
     }
 
-    $error_message = "";
-    $session;
 
-    try{
-        $session = $validate_token($_COOKIE['sessionID']);
-        if(!$session['is_valid']) {
-            header("location: login.php");
-            exit;
-        }
-
-        // Need checking superuser??
-        else if($session['is_superuser']){
-            echo 'asdsadsa';
-            header("location: dashboard.php");
-            exit;
-        }
-
-        $sql = "SELECT t.chocolate_id, c.name, t.amount, t.totalprice, t.time, t.address 
-                FROM TRANSACTIONS as t LEFT JOIN CHOCOLATES as c 
-                ON t.chocolate_id = c.id where t.username = :username";
-        $pdo = $connect_db();
-        $stmt = $pdo->prepare($sql);
-        $stmt->bindParam(':username', $session['username']);
-
-        $stmt->execute();
-
-        $transactions = $stmt->fetchAll(PDO::FETCH_CLASS);
-
-    } 
-    catch (Exception $error) {
-        $error_message = $error->getMessage();
-    }
+    ['connect_db' => $connect_db] = require 'utils/db_connect.php';
+    $sql = "SELECT c.name, t.amount, t.totalprice, t.time, t.address FROM transactions as t, chocolates as c WHERE t.username = :username AND c.id = t.chocolate_id ORDER BY time DESC";
+    $db = $connect_db();
+    $stmt = $db->prepare($sql);
+    $stmt->bindParam(':username', $session['username']);
+    $stmt->execute();
+    $transactions = $stmt->fetchAll(PDO::FETCH_CLASS);
+    // print_r($transactions);
+} catch (Exception $error) {
+    $error_message = $error->getMessage();
+}
 
 ?>
 
 <!DOCTYPE html>
 <html>
+<<<<<<< HEAD
     <head>
         <title>Register</title>
         <link rel="stylesheet" href="../public/css/register.css" type="text/css">
@@ -66,6 +63,29 @@
                 else{
                     echo '<table> ';
                     echo "<tr>
+=======
+
+<head>
+    <title>Register</title>
+    <link rel="stylesheet" href="../public/css/history.css" type="text/css">
+</head>
+
+<body>
+    <main>
+        <?php include('components/header.php') ?>
+        <div class="container">
+            <div class="page-title text-title">
+                Transaction History
+            </div>
+        </div>
+        <?php
+        if (count($transactions) === 0) {
+            echo '<div> Nothing to show </div>';
+        } else {
+
+            echo '<table class="text-content"> ';
+            echo "<tr>
+>>>>>>> a60f45c37ad68eadaae449b0be314fb2f1620ae7
                             <th>
                                 Chocolate Name:
                             </th>
@@ -85,9 +105,14 @@
                                 Address:
                             </th>
                         </tr>";
-                    foreach ($transactions as $transaction){
-                        $datetime = explode(" ",$transaction->time);
-                        echo "<tr>
+            foreach ($transactions as $transaction) {
+                $datetime = explode(" ", $transaction->time);
+                // $rtime = date_create($transaction->time);
+                print_r($transaction->time);
+                echo "<br>";
+                // echo $rtime;
+                // $fdate = date_format($transaction->time, "Y/m/d H:i:s");
+                echo "<tr>
                                 <th>
                                     <a href='detail_chocolate.php?id=$transaction->chocolate_id'>
                                         $transaction->name
@@ -100,25 +125,25 @@
                                     $transaction->totalprice
                                 </th>
                                 <th>
-                                    $datetime[0]
+                                   $transaction->time
                                 </th>
                                 <th>
-                                    $datetime[1]
+                                    test
                                 </th>
                                 <th>
                                     $transaction->address
                                 </th>
                             </tr>";
-                    }
+            }
 
-                    echo '</table> ';
-                }
-            ?>
-        </main>
-        <div class="spacer"></div>
-        <script>
-            
-        </script>    
-    </body>
+            echo '</table> ';
+        }
+        ?>
+    </main>
+    <div class="spacer"></div>
+    <script>
+
+    </script>
+</body>
+
 </html>
-

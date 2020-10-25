@@ -34,13 +34,19 @@
   margin-bottom: 25px;
 }
 
-.btn-primary {
-  position: absolute;
+.btn-submit {
   float: right;
-  right: 80px;
-  bottom: 60px;
 }
 
-.login-error {
+.error {
   color: red;
+}
+
+.border-error {
+  border-width: 3px;
+  border-color: red;
+}
+
+.btn-secondary {
+  background-color: var(--primary-light2);
 }

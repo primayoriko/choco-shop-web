@@ -1,8 +1,9 @@
 <?php
-    $keyword = '';
-    if (isset($_GET['search'])){
-        $keyword = htmlspecialchars(trim($_GET['search']));
-    }
+$keyword = '';
+if (isset($_GET['search'])) {
+    $keyword = htmlspecialchars(trim($_GET['search']));
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -14,21 +15,25 @@
 
 <body>
     <script>
-        function send()
-        {document.searchbar.submit()}
+        function send() {
+            document.searchbar.submit()
+        }
     </script>
     <header class="text-title">
         <div class="header-comp">
-            <div class="header-menu" id="homeButton">
-                <a href="/src/dashboard.php">Home</a>
-            </div>
+            <a class="header-menu" id="homeButton" href="/src/dashboard.php">
+                Home
+            </a>
             <?php
-            if (isset($_SESSION['isSuperuser'])) {
-                if ($_SESSION["isSuperuser"]) {
-                    echo '<div class="header-menu"> Add New Chocolate </div>';
-                } else {
-                    echo '<div class="header-menu"> History </div>';
-                }
+
+            if ($session['is_superuser']) {
+                echo '<a class="header-menu" href="/src/new_chocolate.php">
+                    Add New Chocolate
+                </a>';
+            } else if (!$session['is_superuser']) {
+                echo '<a class="header-menu" href="/src/transaction_history.php">
+                    History
+                </a>';
             }
             ?>
         </div>
@@ -37,9 +42,9 @@
                 <input class="search-bar" type="text" name="search" placeholder="Search" value="<?php echo $keyword ?>" onUnfocus="send()">
             </form>
         </div>
-        <div class="header-comp header-menu" id="logoutButton">
-            <a href="/src/utils/logout.php">Logout</a>
-        </div>
+        <a class="header-comp header-menu" id="logoutButton" href="/src/utils/logout.php">
+            Logout
+        </a>
     </header>
 
 </body>

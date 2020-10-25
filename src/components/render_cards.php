@@ -1,4 +1,8 @@
 <?php
+
+['validate_token' => $validate_token] = require '../utils/authentication.php';
+$session = $validate_token($_COOKIE['sessionID']);
+
 // $ Fetch menu list 
 include '../utils/utility.php';
 $menu_list = [];
@@ -15,6 +19,7 @@ $transactions = $db->query($sql)->fetchAll();
 for ($i = 0; $i <  count($menu_list); $i++) {
     $menu_list[$i]['sold'] = getSold($menu_list[$i]['id'], $transactions);
     $menu_list[$i]['image'] = $asset_dir . $menu_list[$i]['id'] . $menu_list[$i]['image_extension'];
+    $menu_list[$i]['is_superuser'] = $session['is_superuser'];
 }
 
 // $ Sort array on amount of sold chocolate
@@ -35,7 +40,7 @@ function renderAllMenu($menu)
 
 function render10Menu($menu)
 {
-    for ($i = 0; $i < 10; $i++) {
+    for ($i = 0; $i < 10 && $i < count($menu); $i++) {
         choco_card($menu[$i]);
     }
 }

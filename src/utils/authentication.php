@@ -117,4 +117,3 @@
     };
 
     return compact('validate_token', 'make_token', 'destroy_token');
-?>
