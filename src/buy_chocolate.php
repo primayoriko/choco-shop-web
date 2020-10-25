@@ -1,6 +1,7 @@
 <?php
 ['validate_token' => $validate_token] = require 'utils/authentication.php';
 ['make_token' => $make_token] = require 'utils/authentication.php';
+['connect_db' => $connect_db] = require 'utils/db_connect.php';
 
 if (!isset($_COOKIE['sessionID'])) {
     header("location: login.php");
@@ -18,10 +19,31 @@ if ($session['is_superuser']) {
     $mode = ['link' => '/src/buy_chocolate.php?id=', 'name' => 'Buy Now'];
 }
 
+if($_SERVER["REQUEST_METHOD"] === "POST"){
+    date_default_timezone_set('Asia/Jakarta');
+
+    $address = $_POST['address'];
+    $chocolate_id = $_POST['id'];
+    $username = $session['username'];
+    $amount = $_POST['amount'];
+    $totalprice = $_POST['totalprice'];
+    $time = date("Y-m-d H:i:s");
+
+    try{
+        // $sql = "";
+        // $sql = "UPDATE chocolates SET amount =  FROM ";
+        // $sql = "INSERT INTO transactions VALUE";
+        // $pdo = $connect_db();
+        // $stmt = $pdo->prepare($sql);
+        // $stmt->execute();
+    } catch (Exception $err){
+
+    }
+}
+
 include('utils/utility.php');
 
 if (isset($_GET['id'])) {
-    ['connect_db' => $connect_db] = require 'utils/db_connect.php';
     require_once(__DIR__ . '/../config/image_saving.config.php');
     $asset_dir = '../' . CHOCO_IMG_DIR . '/';
     $db = $connect_db();
