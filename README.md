@@ -11,6 +11,9 @@ INSERT GIF
 
 1. xampp (masukkan path ke `...xampp\php` ke dalam PATH env)
 2. inisialisasi database (menggunakan ...)
+3. Sejauh ini, browser yang support aplikasi kami hanyalah Mozilla Firefox,
+   karena ada masalah dengan policy setcookie sehingga kami tidak dapat menambahkan cookie dengan set cookie
+4. adsa
 
 ## How to Install
 
@@ -55,3 +58,4 @@ INSERT GIF
 7. Search Results: 13518125
 8. Transaction History: 13518135, 13518146
 9. New Chocolate: 13518146
+10. DB Model : 13518146

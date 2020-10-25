@@ -43,6 +43,26 @@ try {
 
 <!DOCTYPE html>
 <html>
+<<<<<<< HEAD
+    <head>
+        <title>Register</title>
+        <link rel="stylesheet" href="../public/css/register.css" type="text/css">
+    </head>
+    <body>
+        <div class="spacer"></div>
+        <header>
+            Transaction History
+        </header>
+        <div class="spacer"></div>
+        <main>
+            <?php 
+                if(count($transactions) === 0){
+                    echo '<div> Nothing to show </div>';
+                }
+                else{
+                    echo '<table> ';
+                    echo "<tr>
+=======
 
 <head>
     <title>Register</title>
@@ -56,10 +76,23 @@ try {
             <div class="page-title text-title">
                 Transaction History
             </div>
+<<<<<<< HEAD
+        </div>
+        <?php
+        if (count($transactions) === 0) {
+            echo '<div> Nothing to show </div>';
+        } else {
+
+            echo '<table class="text-content"> ';
+            echo "<tr>
+>>>>>>> a60f45c37ad68eadaae449b0be314fb2f1620ae7
+                            <th>
+                                Chocolate Name:
+=======
             <div class="table-container">
                 <?php
                 if (count($transactions) === 0) {
-                    echo '<div> Nothing to show </div>';
+                    echo '<div class="text-subtitle "> Anda belum melakukan transaksi :( </div>';
                 } else {
 
                     echo '<table class="text-subtitle"> ';
@@ -67,6 +100,7 @@ try {
                     <tr>
                             <th >
                                 Chocolate Name
+>>>>>>> 4b857b42dc279c54707e8cbd731e2c06c9875d49
                             </th>
                             <th>
                                 Amount
