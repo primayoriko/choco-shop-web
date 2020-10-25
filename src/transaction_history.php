@@ -65,23 +65,23 @@ try {
                     echo '<table class="text-subtitle"> ';
                     echo "<thead>
                     <tr>
-                            <th>
-                                Chocolate Name:
+                            <th >
+                                Chocolate Name
                             </th>
                             <th>
-                                Amount:
+                                Amount
                             </th>
                             <th>
-                                Total Price:
+                                Total Price
                             </th>
                             <th>
-                                Date:
+                                Date
                             </th>
                             <th>
-                                Time:
+                                Time
                             </th>
                             <th>
-                                Address:
+                                Address
                             </th>
                         </tr>
                         </thead>
@@ -90,27 +90,28 @@ try {
                         $rtime = date_create($transaction->time);
                         $fdate = date_format($rtime, "d F y");
                         $ftime = date_format($rtime, "H:i:s");
-                        echo "<tr class='text-subtitle'>
-                                <th>
-                                    <a href='detail_chocolate.php?id=$transaction->chocolate_id'>
+                        $fprice = number_format($transaction->totalprice, 2, ",", ".");
+                        echo "<tr >
+                                <td>
+                                    <a class='choco-title' href='detail_chocolate.php?id=$transaction->chocolate_id'>
                                         $transaction->name
                                     </a>
-                                </th>
-                                <th>
+                                </td>
+                                <td>
                                     $transaction->amount
-                                </th>
-                                <th>
-                                    $transaction->totalprice
-                                </th>
-                                <th>
+                                </td>
+                                <td>
+                                    Rp $fprice
+                                </td>
+                                <td>
                                    $fdate
-                                </th>
-                                <th>
+                                </td>
+                                <td>
                                     $ftime
-                                </th>
-                                <th>
+                                </td>
+                                <td>
                                     $transaction->address
-                                </th>
+                                </td>
                             </tr>";
                     }
 

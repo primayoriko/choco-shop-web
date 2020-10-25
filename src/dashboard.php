@@ -31,11 +31,9 @@ if (!$session['is_valid']) {
         <?php include('components/header.php') ?>
         <div class="container">
             <div class="top-container text-title">
-                <!-- <?php
-                        echo ('<h3 class="top-content">Hello, ' . $_SESSION["username"] . '</h3>')
-                        ?> -->
-                <!-- $ Sementara  -->
-                <h3 class="top-content">Hello, user </h3>
+                <?php
+                echo "<h3 class='top-content'>Hello, " . $session['username'] . "</h3>";
+                ?>
                 <div class="top-content" id="buttonView"></div>
             </div>
             <div class="menu-container" id="menu">
