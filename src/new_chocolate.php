@@ -70,22 +70,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $new_filepath =  '../' . CHOCO_IMG_DIR .  $id . $image_extension;
         move_uploaded_file($_FILES["image"]["tmp_name"], $new_filepath);
 
-            $pdo = $connect_db();
-            $stmt = $pdo->prepare($sql);
-            $stmt->bindParam(":name", $name);
-            $stmt->bindParam(":price", $price);
-            $stmt->bindParam(":description", $description);
-            $stmt->bindParam(":amount", $amount);
-            $stmt->bindParam(":image_extension", $image_extension);
-
-            $stmt->execute();
-            $id = $pdo->lastInsertId();
-            // $new_filepath = __DIR__ . "/../" . CHOCO_IMG_DIR . $id . $image_extension;
-            $new_filepath =  '../' . CHOCO_IMG_DIR .  $id . $image_extension;
-            move_uploaded_file($_FILES["image"]["tmp_name"], $new_filepath);
-
-            header("location: dashboard.php");
-            exit;
+        header("location: dashboard.php");
+        exit;
 
     } 
     catch(Exception $error){
