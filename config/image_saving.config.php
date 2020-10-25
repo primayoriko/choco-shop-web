@@ -1,3 +1,3 @@
 <?php
-    define('CHOCO_IMG_DIR', 'resources/chocolate_img');
+    define('CHOCO_IMG_DIR', 'resources/chocolate_img/');
 ?>
