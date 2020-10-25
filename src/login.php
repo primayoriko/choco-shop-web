@@ -17,15 +17,16 @@
         }
         catch(Exception $error){
             $error_message = $error->getMessage();
+            echo $error_message;
         }
     }
 
 
     if($_SERVER["REQUEST_METHOD"] === "POST"){
-        $username = trim($_POST["username"]);
+        $email = trim($_POST["email"]);
         $password = trim($_POST["password"]);
         try{
-            $token = $make_token($username, $password);
+            $token = $make_token($email, $password);
             if($token['is_success']){
                 // echo $token['session_id'];
                 setcookie('sessionID', $token['session_id'], [
@@ -44,6 +45,7 @@
         } 
         catch (Exception $error){
             $error_message = $error->getMessage();
+            echo $error_message;
         }
     }
     
@@ -53,10 +55,10 @@
 <html>
 
 <head>
+    <link rel="stylesheet" href="../public/css/logreg.css" type="text/css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Register</title>
-    <link rel="stylesheet" href="../public/css/logreg.css" type="text/css">
+    <title>Login</title>
 </head>
 
 <body>
@@ -66,16 +68,14 @@
                 Willy Wangky Choco Factory
             </div>
             <form id="login" action="login.php" method="POST">
-                <div class="text-content label">Username</div>
-                <span id="usernameErrorRow" style="display: none"></span>
-                <p id="usernameError"> </p>
-                <input class="text-input" id="usernameField" name="username">
+                <div class="text-content label">Email</div>
+                <input class="text-input" id="emailField" name="email" type="email">
                 <div class="text-content label">Password</div>
                 <input class="text-input" type="password" id="passwordField" name="password">
+                <span id="login-info"></span>
                 <button class="btn-primary" type="submit" form="login">Login</button>
             </form>
         </div>
     </main>
 </body>
-
 </html>
