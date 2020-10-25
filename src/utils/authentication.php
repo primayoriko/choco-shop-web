@@ -1,5 +1,5 @@
 <?php
-
+    date_default_timezone_set('Asia/Jakarta');
     $validate_token = function($token){
         ['connect_db' => $connect_db ] = require __DIR__ . '/db_connect.php';
 

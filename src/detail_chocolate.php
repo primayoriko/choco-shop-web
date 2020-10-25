@@ -12,6 +12,11 @@
         header("location: login.php");
         exit;
     }
+    if ($session['is_superuser']){
+        $mode = ['link' => '/src/add_chocolate.php?id=', 'name' => 'Add Stock'];
+    } else {
+        $mode = ['link' => '/src/buy_chocolate.php?id=', 'name' => 'Buy Now'];
+    }
 
     include('utils/utility.php');
 
@@ -56,7 +61,7 @@
                     <div class="text-subtitle">Description</div>
                     <p class="text-content"><?php echo $description ?></p>
                 </div>
-                <a href="/src/buy_chocolate.php?id=<?php echo $id ?>"><button class="btn-primary">Buy Now</button></a>
+                <a href="<?php echo $mode['link'] . $id ?>"><button class="btn-primary"><?php echo $mode['name'] ?></button></a>
             </div>
         </div>
     </main>
