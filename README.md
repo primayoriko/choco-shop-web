@@ -9,8 +9,8 @@ Website Willy Wangky adalah website berbasis php yang digunakan untuk membeli co
 ---
 
 1. [XAMPP](https://www.apachefriends.org/index.html)
-2. inisialisasi database (menggunakan `init_db.php` dan `init_dummy_data.php`)
-3. Sejauh ini, browser yang support aplikasi kami hanyalah **Mozilla Firefox**, karena ada masalah dengan policy setcookie sehingga kami tidak dapat menambahkan cookie dengan set cookie
+2. [Mozilla Firefox](https://www.mozilla.org/en-US/firefox/new/), sebab sejauh ini browser yang support aplikasi kami hanyalah Firefox. Kemungkinan besar ini karena ada masalah dengan policy/option method `setcookie` PHP sehingga kami tidak dapat menambahkan cookie dengan set cookie.
+3. inisialisasi database (menggunakan `init_db.php` dan `init_dummy_data.php`) pada MySQL, dapat menggunakan bawaan XAMPP atau install dengan [MySQL](https://www.mysql.com/) sendiri.
 
 ## How to Install
 
@@ -95,3 +95,11 @@ Website Willy Wangky adalah website berbasis php yang digunakan untuk membeli co
 
 1. Expire time session at DB: 13518146
 2. AJAX di real-time stock (partial)
+
+## Kontributor
+
+---
+
+1. [Naufal Prima Yoriko](https://github.com/primayoriko)
+2. [Faris Rizki Ekananda](https://github.com/darkGrimoire)
+3. [Gregorius Jovan Kresnadi](https://github.com/BaconLover307)
