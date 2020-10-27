@@ -21,24 +21,33 @@ if ($session['is_superuser']) {
 
 if($_SERVER["REQUEST_METHOD"] === "POST"){
     date_default_timezone_set('Asia/Jakarta');
-
-    $address = $_POST['address'];
     $chocolate_id = $_POST['id'];
+
+    $db = $connect_db();
+    $sql = "SELECT * FROM chocolates WHERE id=$chocolate_id";
+    $chocolate = $db->query($sql)->fetch();
+    
+    $address = $_POST['address'];
     $username = $session['username'];
-    $amount = $_POST['amount'];
-    $totalprice = $_POST['totalprice'];
+    $amount = $_POST['quantity'];
+    $totalprice = $amount * $chocolate['price'];
     $time = date("Y-m-d H:i:s");
 
-    try{
-        // $sql = "";
-        // $sql = "UPDATE chocolates SET amount =  FROM ";
-        // $sql = "INSERT INTO transactions VALUE";
-        // $pdo = $connect_db();
-        // $stmt = $pdo->prepare($sql);
-        // $stmt->execute();
-    } catch (Exception $err){
+    $sql = "INSERT transactions VALUES (:username, :chocolate_id, :amount, :totalprice, :address, :time)";
+    $pdo = $connect_db();
+    $stmt = $pdo->prepare($sql);
 
-    }
+    $stmt->bindParam(':username', $username);
+    $stmt->bindParam(':chocolate_id', $chocolate_id);
+    $stmt->bindParam(':amount', $amount);
+    $stmt->bindParam(':totalprice', $totalprice);
+    $stmt->bindParam(':address', $address);
+    $stmt->bindParam(':time', $time);
+
+    $stmt->execute();
+
+    header("location: transaction_history.php");
+    exit;
 }
 
 include('utils/utility.php');
@@ -94,43 +103,34 @@ if (isset($_GET['id'])) {
                     </div>
                     <div style="display: none" id='ori-price'>
                         <?php echo $price ?></div>
-                    <div>
-                        <form id="buyChocolate" action="buy_chocolate.php" method="POST" class="amount-modifier text-content">
-                            <?php
-                            if ($amount === 0) {
-                                echo "<div> Items is currently sold out.. </div>";
-                            } else {
-                                echo '
-                            <div>
-                                <div>Amount to buy:</div>
-                                <div class="mod text-subtitle">
-                                    <button type="button" id="minus"> - </button>
-                                    <input class="mod-number text-subtitle" type="number" id="quantity" name="quantity" min="1" max="' . $amount . '">
-                                    <button type="button" id="plus"> + </button>
-                                </div>
-                            </div>
-                            ';
-                            }
-                            ?>
-                            <!-- <div class="total-container">
-                            <div>Total Price</div>
-                            <div class="total-display text-title">Rp <a id="total-price"><a>,00</div>
-                        </div> -->
-                        </form>
-                    </div>
-                    <div>
-                    </div>
                     <!-- price_block -->
                 </div>
             </div>
             <form class="form-bawah" id="buyChocolate" action="buy_chocolate.php" method="POST">
+                <?php
+                    if ($amount === 0) {
+                        echo "<div> Items is currently sold out.. </div>";
+                    } else {
+                        echo '
+                    <div>
+                        <div class="text-title">Amount to buy:</div>
+                        <div class="mod text-subtitle">
+                            <button type="button" id="minus"> - </button>
+                            <input class="mod-number text-subtitle" type="number" id="quantity" name="quantity" min="1" max="' . $amount . '">
+                            <button type="button" id="plus"> + </button>
+                        </div>
+                    </div>
+                    ';
+                    }
+                ?>
+                <input type="hidden" id="id" name="id" value="<?php echo $id ?>">
                 <div class="address-block text-subtitle">
                     <label> Address: </label>
                     <textarea class="address-input" name="address" id="address" cols="40" rows="3" placeholder="insert your address"></textarea>
                 </div>
                 <div class="btn-group ">
-                    <button class="btn-secondary text-subtitle"> Cancel </button>
-                    <button class="btn-primary text-subtitle" id="btn-buy">Buy</button>
+                    <a href="/src/detail_chocolate.php?id=<?php echo $id ?>"><button class="btn-secondary text-subtitle" type="button"> Cancel </button></a>
+                    <button class="btn-primary text-subtitle" id="btn-buy" type="submit">Buy</button>
                 </div>
             </form>
         </div>

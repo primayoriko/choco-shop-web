@@ -1,0 +1,7 @@
+<!-- INSERT YOUR CREDS BELOW -->
+<?php
+  define('DB_SERVER', 'INSERT YOUR SERVER URL');
+  define('DB_USERNAME', 'INSERT YOUR USERNAME');
+  define('DB_PASSWORD', 'INSERT YOUR PASS'); 
+  define('DB_NAME', 'INSERT YOUR DB NAME'); 
+?>
