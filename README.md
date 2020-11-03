@@ -2,7 +2,9 @@
 
 ---
 
-Website Willy Wangky adalah website berbasis php yang digunakan untuk membeli coklat dari pabrik coklat terbesar dan terenak di dunia, Willy Wangky
+Website Willy Wangky adalah website berbasis php yang digunakan untuk membeli coklat dari pabrik coklat terbesar dan terenak di dunia, Willy Wangky.
+
+Website hasil deploy dapat diakses [disini](http://wangky-shop.infinityfreeapp.com/).
 
 ## Dependency
 
